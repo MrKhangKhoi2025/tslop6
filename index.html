@@ -1,279 +1,318 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="Tra cứu từ điển tiếng Xê Đăng, Xơ Đăng và 54 dân tộc Việt Nam chính xác. Hỗ trợ phát âm, phiên âm và dịch thuật song ngữ">
-    <meta name="keywords" content="từ điển xê đăng, từ điển xơ đăng, tra cứu tiếng xê đăng, dịch tiếng dân tộc, tiếng xơ đăng việt">
-    <title>Từ Điển Tiếng Xơ Đăng - Tiếng Kinh | Tra Cứu Chính Xác</title>
+    <title>Từ Điển Xơ Đăng ↔ Tiếng Việt | Tra 5000+ Từ Chuẩn Xác</title>
+    <meta name="description" content="Khám phá từ điển Xơ Đăng - Việt với hơn 5000 từ vựng chuẩn xác. Tra cứu miễn phí, hỗ trợ phát âm và dịch thuật song ngữ.">
+    <meta name="keywords" content="từ điển xơ đăng, dịch tiếng dân tộc, học tiếng xơ đăng, từ vựng xơ đăng, tiếng dân tộc thiểu số">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Từ Điển Dân Tộc">
+
+    <!-- Open Graph & Twitter Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mrkhangkhoi2025.github.io/tudienxodang/">
+    <meta property="og:title" content="Từ Điển Xơ Đăng ↔ Tiếng Việt | Tra 5000+ Từ Chuẩn Xác">
+    <meta property="og:description" content="Hệ thống tra cứu song ngữ Xơ Đăng - Việt chính xác nhất">
+    <meta property="og:image" content="https://mrkhangkhoi2025.github.io/tudienxodang/images/xodang-culture.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@tudienxodang">
+    <meta name="twitter:image" content="https://mrkhangkhoi2025.github.io/tudienxodang/images/xodang-culture.jpg">
+
+    <!-- Preconnect & Canonical -->
+    <link rel="preconnect" href="https://sheets.googleapis.com">
+    <link rel="canonical" href="https://mrkhangkhoi2025.github.io/tudienxodang/">
+    <link rel="sitemap" href="https://mrkhangkhoi2025.github.io/tudienxodang/sitemap.xml">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "DefinedTermSet",
+        "name": "Từ điển Xơ Đăng - Việt",
+        "description": "Hệ thống tra cứu song ngữ Xơ Đăng - Tiếng Việt với hơn 5000 từ vựng",
+        "inLanguage": ["vi", "sed"],
+        "publisher": {
+            "@type": "Organization",
+            "name": "Từ Điển Dân Tộc",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://mrkhangkhoi2025.github.io/tudienxodang/logo.png"
+            }
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://mrkhangkhoi2025.github.io/tudienxodang/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://mrkhangkhoi2025.github.io/tudienxodang/?q={search_term}",
+            "query-input": "required name=search_term"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "url": "https://mrkhangkhoi2025.github.io/tudienxodang/#intro",
+        "name": "Giới Thiệu Về Tiếng Xơ Đăng",
+        "description": "Tìm hiểu về tiếng Xơ Đăng, ngôn ngữ của dân tộc Xơ Đăng tại Việt Nam.",
+        "image": "https://mrkhangkhoi2025.github.io/tudienxodang/images/xodang-culture.jpg"
+    }
+    </script>
+
     <style>
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
             --accent-color: #e74c3c;
-            --highlight-color: #ff6b6b;
             --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             --transition-speed: 0.3s;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: var(--background-gradient);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             line-height: 1.6;
             color: var(--primary-color);
         }
-
-        .container {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            width: 95%;
-            max-width: 800px;
-            margin: 2rem auto;
-            transition: transform var(--transition-speed) ease;
-            backdrop-filter: blur(10px);
+        .navbar {
+            background: rgba(255,255,255,0.95);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
-
-        header {
-            text-align: center;
-            padding: 1.5rem 0;
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
         }
-
-        h1 {
+        .navbar a {
             color: var(--primary-color);
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 1.5rem;
-            line-height: 1.3;
-            text-transform: uppercase; /* In hoa tiêu đề */
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-speed);
         }
-
+        .navbar a:hover { color: var(--secondary-color); }
+        .container {
+            background: rgba(255,255,255,0.98);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 1rem auto;
+            backdrop-filter: blur(10px);
+            display: none;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+        .container.active {
+            display: block;
+            opacity: 1;
+        }
+        h1, h2 { text-align: center; margin-bottom: 1.5rem; }
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.5rem; color: var(--secondary-color); }
+        .intro-content {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .intro-content p { margin-bottom: 1rem; }
+        .intro-content ul { list-style: none; padding: 0; }
+        .intro-content li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .intro-content li i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+        .feature-image {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .feature-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
         #searchForm {
             display: grid;
             gap: 1rem;
             grid-template-columns: 1fr auto;
         }
-
-        .input-group {
-            display: grid;
-            gap: 0.5rem;
-            position: relative;
-        }
-
-        .form-label {
-            font-weight: 600; /* Chữ đậm */
-            font-size: 1.1rem; /* Kích thước chữ phù hợp */
-            color: var(--primary-color); /* Màu đồng nhất */
-            text-transform: uppercase; /* In hoa */
-        }
-
-        input[type="text"],
-        select {
-            padding: 0.8rem 1.2rem;
+        .input-group { display: grid; gap: 0.5rem; }
+        .form-label { font-weight: 600; color: var(--primary-color); }
+        input[type="text"], select {
+            padding: 0.8rem;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 1rem;
-            width: 100%;
-            transition: all var(--transition-speed) ease;
-            appearance: none;
         }
-
-        select {
-            background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 0.8rem center/16px 16px;
-            padding-right: 2.5rem;
-        }
-
-        input[type="text"]:focus,
-        select:focus {
+        input[type="text"]:focus, select:focus {
             border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.2);
             outline: none;
         }
-
         button {
             padding: 0.8rem 1.8rem;
             background: var(--secondary-color);
             color: white;
             border: none;
             border-radius: 8px;
-            font-weight: 600;
             cursor: pointer;
-            transition: 
-                background-color var(--transition-speed) ease,
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+            transition: background var(--transition-speed), transform var(--transition-speed);
         }
-
         button:hover {
             background: #2980b9;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            transform: translateY(-2px);
         }
-
         .result-container {
             margin-top: 2rem;
             padding: 2rem;
             background: #fff;
             border-radius: 12px;
             border: 2px solid var(--secondary-color);
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.15);
-            min-height: 150px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-
         .word-card {
-            display: grid;
-            gap: 1rem;
             padding: 1.5rem;
             background: #f8fafc;
             border-radius: 8px;
             border-left: 4px solid var(--accent-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-
-        .word,
-        .translation,
-        .pronunciation {
-            font-size: 1.1rem;
-            color: var(--primary-color);
+        .highlight-word {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.2em;
         }
-
-        .word strong,
-        .translation strong,
-        .pronunciation strong {
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .word span,
-        .translation span,
-        .pronunciation span {
-            color: var(--accent-color);
-            font-weight: 700;
-            font-size: 1.3rem;
-        }
-
         .error {
             color: #e74c3c;
-            padding: 1.5rem;
+            padding: 1rem;
             background: #fdeded;
             border-radius: 8px;
             margin: 1rem 0;
-            border: 1px solid #f5c6cb;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 1.5rem;
-            color: var(--secondary-color);
-            font-size: 1.1rem;
-        }
-
-        .no-result {
-            color: var(--primary-color);
-            text-align: center;
-            padding: 2rem;
-            font-style: italic;
-        }
-
         @media (max-width: 768px) {
-            #searchForm {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 1.5rem;
-                margin: 1rem;
-            }
-            
-            .word,
-            .translation,
-            .pronunciation {
-                font-size: 1rem;
-            }
-            
-            .word strong,
-            .translation strong,
-            .pronunciation strong {
-                font-size: 1rem;
-            }
-            
-            .word span,
-            .translation span,
-            .pronunciation span {
-                font-size: 1.2rem;
-            }
-            
-            .result-container {
-                padding: 1.5rem;
-            }
-            
-            button {
-                width: 100%;
-            }
+            #searchForm { grid-template-columns: 1fr; }
+            .container { padding: 1.5rem; }
+            button { width: 100%; }
+            .navbar ul { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
 <body>
-    <header role="banner">
-        <div class="container">
-            <h1>Tra Cứu Tiếng Xơ Đăng - Tiếng Kinh</h1>
-            <form id="searchForm" role="search">
-                <div class="input-group">
-                    <label for="word" class="form-label">Nhập từ cần tra</label>
-                    <input type="text" 
-                           id="word" 
-                           placeholder="Nhập từ cần tra cứu (ví dụ: ăn cơm, ka me...)"
-                           autocomplete="off"
-                           aria-describedby="searchHelp"
-                           list="suggestions">
-                    <datalist id="suggestions"></datalist>
-                </div>
-                <div class="input-group">
-                    <label for="direction" class="form-label">Chọn hướng dịch</label>
-                    <select id="direction">
-                        <option value="viet_to_ethnic">Tiếng Kinh → Xơ Đăng</option>
-                        <option value="ethnic_to_viet">Xơ Đăng → Tiếng Kinh</option>
-                    </select>
-                </div>
-                <button type="submit">
-                    🔍 Tra cứu
-                </button>
-            </form>
-            <div class="loading" id="loading">Đang tải dữ liệu...</div>
-        </div>
-    </header>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home" onclick="showSection('home')">Trang chủ</a></li>
+            <li><a href="#intro" onclick="showSection('intro')">Giới thiệu tiếng Xơ Đăng</a></li>
+        </ul>
+    </nav>
 
-    <main class="container" role="main">
-        <section aria-live="polite" aria-atomic="true">
+    <!-- Trang chủ -->
+    <section id="home" class="container active">
+        <h1>Tra Cứu Tiếng Xơ Đăng - Tiếng Việt</h1>
+        <section class="intro-content">
+            <p>Hệ thống tra cứu song ngữ Xơ Đăng - Việt với hơn 5000 từ vựng, hỗ trợ phát âm và dịch thuật chính xác.</p>
+            <ul>
+                <li><i class="fas fa-book"></i> Hơn 5000 từ vựng chuẩn</li>
+                <li><i class="fas fa-volume-up"></i> Hỗ trợ phát âm</li>
+                <li><i class="fas fa-language"></i> Dịch thuật song ngữ</li>
+            </ul>
+        </section>
+        <form id="searchForm" role="search">
+            <div class="input-group">
+                <label for="word" class="form-label">Nhập từ cần tra</label>
+                <input type="text" id="word" placeholder="Ví dụ: ăn cơm, ka me..." autocomplete="off" list="suggestions">
+                <datalist id="suggestions"></datalist>
+            </div>
+            <div class="input-group">
+                <label for="direction" class="form-label">Hướng dịch</label>
+                <select id="direction">
+                    <option value="viet_to_ethnic">Việt → Xơ Đăng</option>
+                    <option value="ethnic_to_viet">Xơ Đăng → Việt</option>
+                </select>
+            </div>
+            <button type="submit">🔍 Tra cứu</button>
+        </form>
+        <div class="loading" id="loading" style="display:none">Đang tải...</div>
+        <section aria-live="polite">
             <div class="result-container" id="resultContainer">
                 <div id="result"></div>
                 <div id="error" class="error" role="alert" hidden></div>
             </div>
         </section>
-    </main>
+    </section>
 
+    <!-- Trang giới thiệu -->
+    <section id="intro" class="container">
+        <h1>Giới Thiệu Về Tiếng Xơ Đăng</h1>
+        <section class="intro-content">
+            <p>Tiếng Xơ Đăng là ngôn ngữ của dân tộc Xơ Đăng, một trong 54 dân tộc anh em tại Việt Nam. Ngôn ngữ này thuộc nhóm ngôn ngữ Nam Á, chủ yếu được sử dụng tại tỉnh Kon Tum và một số khu vực lân cận như Quảng Nam và Quảng Ngãi.</p>
+            <h2>Đặc Điểm Nổi Bật</h2>
+            <ul>
+                <li><i class="fas fa-language"></i> Thuộc nhóm ngôn ngữ Môn-Khmer của ngữ hệ Nam Á.</li>
+                <li><i class="fas fa-volume-up"></i> Có hệ thống nguyên âm phong phú với 24 âm vị nguyên âm.</li>
+                <li><i class="fas fa-globe"></i> Được sử dụng chủ yếu ở tỉnh Kon Tum, Việt Nam.</li>
+                <li><i class="fas fa-users"></i> Có quan hệ gần gũi với các dân tộc như Giẻ Triêng, Co, Hrê và Ba Na.</li>
+            </ul>
+            <h2>Lịch Sử và Văn Hóa</h2>
+            <p>Người Xơ Đăng có truyền thống văn hóa đặc sắc, thể hiện qua các lễ hội, trang phục và kiến trúc độc đáo như nhà rông. Ngôn ngữ Xơ Đăng không chỉ là phương tiện giao tiếp mà còn là cầu nối văn hóa, lưu giữ những giá trị truyền thống của dân tộc.</p>
+            <div class="feature-image">
+                <img src="https://mrkhangkhoi2025.github.io/tudienxodang/images/xodang-culture.jpg" alt="Văn hóa dân tộc Xơ Đăng" loading="lazy">
+            </div>
+            <h2>Tầm Quan Trọng Của Việc Học Tiếng Xơ Đăng</h2>
+            <p>Học tiếng Xơ Đăng không chỉ giúp bảo tồn ngôn ngữ mà còn mở ra cơ hội giao lưu văn hóa, hiểu biết sâu sắc hơn về dân tộc Xơ Đăng. Với hệ thống từ điển song ngữ Xơ Đăng - Việt, việc tra cứu và học tập trở nên dễ dàng hơn bao giờ hết.</p>
+        </section>
+    </section>
+
+    <!-- JavaScript -->
     <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.container').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        showSection('home');
+
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const sectionId = this.getAttribute('href').substring(1);
+                showSection(sectionId);
+            });
+        });
+
         (function() {
             const config = {
                 API_KEY: 'AIzaSyD757jS4SLR7-EzrPgrW9WrLQeD2DQExHw',
                 SHEET_ID: '1Z59pDBu_tGwlYqUeS1-VJLpcHozp7LbxnC_-qhT3iHs',
                 RANGE: 'Sheet1!A2:C'
             };
-
             let dictionary = [];
             let initialized = false;
-
             const dom = {
                 searchForm: document.getElementById('searchForm'),
                 wordInput: document.getElementById('word'),
@@ -284,48 +323,37 @@
                 suggestions: document.getElementById('suggestions')
             };
 
-            function showLoading() {
-                dom.loading.style.display = 'block';
-            }
-
-            function hideLoading() {
-                dom.loading.style.display = 'none';
-            }
-
-            function showError(message) {
-                dom.errorDiv.textContent = message;
-                dom.errorDiv.hidden = false;
-                dom.resultDiv.innerHTML = '';
-            }
-
-            function clearResults() {
-                dom.errorDiv.hidden = true;
-                dom.resultDiv.innerHTML = '';
-            }
+            function showLoading() { dom.loading.style.display = 'block'; }
+            function hideLoading() { dom.loading.style.display = 'none'; }
+            function showError(message) { dom.errorDiv.textContent = message; dom.errorDiv.hidden = false; }
+            function clearResults() { dom.resultDiv.innerHTML = ''; dom.errorDiv.hidden = true; }
 
             async function fetchDictionary() {
                 try {
                     showLoading();
                     const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.SHEET_ID}/values/${config.RANGE}?key=${config.API_KEY}`;
                     const response = await fetch(url);
-                    
-                    if (!response.ok) throw new Error(`Lỗi mạng: ${response.status}`);
-                    
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            throw new Error('Không tìm thấy bảng tính. Kiểm tra Sheet ID.');
+                        } else if (response.status === 403) {
+                            throw new Error('Không có quyền truy cập. Đảm bảo bảng tính được chia sẻ công khai.');
+                        } else {
+                            throw new Error(`Lỗi mạng: ${response.status} ${response.statusText}`);
+                        }
+                    }
                     const data = await response.json();
-                    
-                    if (!data.values?.length) throw new Error('Không tìm thấy dữ liệu');
-                    
+                    if (!data.values) {
+                        throw new Error('Dữ liệu không hợp lệ. Kiểm tra cấu trúc bảng tính.');
+                    }
                     dictionary = data.values.map(row => ({
-                        ethnic: row[0]?.trim().toLowerCase() || '',
-                        viet: row[1]?.trim().toLowerCase() || '',
-                        pronunciation: row[2]?.trim() || ''
+                        ethnic: row[0]?.trim().toLowerCase(),
+                        viet: row[1]?.trim().toLowerCase(),
+                        pronunciation: row[2]?.trim()
                     })).filter(item => item.ethnic && item.viet);
-                    
                     initialized = true;
-                    console.log('Dữ liệu đã tải:', dictionary.length, 'từ');
                 } catch (error) {
                     showError(`Lỗi tải dữ liệu: ${error.message}`);
-                    console.error('Lỗi:', error);
                 } finally {
                     hideLoading();
                 }
@@ -333,65 +361,41 @@
 
             function searchTerm(term) {
                 const cleanTerm = term.toLowerCase().trim();
-                const direction = dom.directionSelect.value;
-                return direction === 'ethnic_to_viet' 
+                return dom.directionSelect.value === 'ethnic_to_viet'
                     ? dictionary.find(item => item.ethnic === cleanTerm)
                     : dictionary.find(item => item.viet === cleanTerm);
             }
 
             function renderResult(entry) {
-                if (!entry) return '<p class="no-result">Không tìm thấy kết quả phù hợp</p>';
-                
+                if (!entry) return '<p>Không tìm thấy kết quả</p>';
                 const isEthnicToViet = dom.directionSelect.value === 'ethnic_to_viet';
-                const ethnicWord = isEthnicToViet ? entry.ethnic : entry.viet;
-                const vietWord = isEthnicToViet ? entry.viet : entry.ethnic;
-                const pronunciation = entry.pronunciation;
-
                 return `
-                    <article class="word-card">
-                        <p class="word"><strong>Từ tra cứu:</strong> <span>${ethnicWord}</span></p>
-                        <p class="translation"><strong>Ý nghĩa:</strong> <span>${vietWord}</span></p>
-                        ${pronunciation ? `<p class="pronunciation"><strong>Phát âm:</strong> <span>${pronunciation}</span></p>` : ''}
-                    </article>
+                    <div class="word-card">
+                        <p><strong>Từ:</strong> <span class="highlight-word">${isEthnicToViet ? entry.ethnic : entry.viet}</span></p>
+                        <p><strong>Nghĩa:</strong> <span class="highlight-word">${isEthnicToViet ? entry.viet : entry.ethnic}</span></p>
+                        ${entry.pronunciation ? `<p><strong>Phát âm:</strong> ${entry.pronunciation}</p>` : ''}
+                    </div>
                 `;
             }
 
-            function handleSearch(event) {
-                event.preventDefault();
-                const rawTerm = dom.wordInput.value.trim();
-                const term = rawTerm.toLowerCase();
-                
-                if (!term) {
-                    showError('Vui lòng nhập từ cần tra cứu');
-                    return;
-                }
-                
-                if (!initialized) {
-                    showError('Hệ thống chưa sẵn sàng, vui lòng thử lại sau');
-                    return;
-                }
-
+            function handleSearch(e) {
+                e.preventDefault();
+                if (!initialized) return showError('Dữ liệu chưa sẵn sàng');
+                const term = dom.wordInput.value.trim();
+                if (!term) return showError('Nhập từ cần tra');
                 clearResults();
-                
                 const result = searchTerm(term);
                 dom.resultDiv.innerHTML = renderResult(result);
-                dom.wordInput.value = rawTerm; // Giữ nguyên định dạng nhập ban đầu
             }
 
             function initAutocomplete() {
                 dom.wordInput.addEventListener('input', function() {
                     const term = this.value.toLowerCase().trim();
                     dom.suggestions.innerHTML = '';
-                    
                     if (term.length < 1) return;
-                    
                     const suggestions = dictionary
-                        .filter(item => 
-                            item.ethnic.includes(term) ||
-                            item.viet.includes(term)
-                        )
+                        .filter(item => item.ethnic.includes(term) || item.viet.includes(term))
                         .slice(0, 10);
-                    
                     suggestions.forEach(item => {
                         const option = document.createElement('option');
                         option.value = dom.directionSelect.value === 'ethnic_to_viet' ? item.ethnic : item.viet;
@@ -402,8 +406,6 @@
 
             dom.searchForm.addEventListener('submit', handleSearch);
             dom.directionSelect.addEventListener('change', () => dom.wordInput.value = '');
-            
-            // Khởi động ứng dụng
             fetchDictionary().then(initAutocomplete);
         })();
     </script>
