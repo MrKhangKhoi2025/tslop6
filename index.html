@@ -1,413 +1,589 @@
 <!DOCTYPE html>
-<html lang="vi" prefix="og: https://ogp.me/ns#">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Từ Điển Xơ Đăng ↔ Tiếng Việt | Tra 5000+ Từ Chuẩn Xác</title>
-    <meta name="description" content="Khám phá từ điển Xơ Đăng - Việt với hơn 5000 từ vựng chuẩn xác. Tra cứu miễn phí, hỗ trợ phát âm và dịch thuật song ngữ.">
-    <meta name="keywords" content="từ điển xơ đăng, dịch tiếng dân tộc, học tiếng xơ đăng, từ vựng xơ đăng, tiếng dân tộc thiểu số">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Từ Điển Dân Tộc">
-
-    <!-- Open Graph & Twitter Cards -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mrkhangkhoi2025.github.io/tudienxodang/">
-    <meta property="og:title" content="Từ Điển Xơ Đăng ↔ Tiếng Việt | Tra 5000+ Từ Chuẩn Xác">
-    <meta property="og:description" content="Hệ thống tra cứu song ngữ Xơ Đăng - Việt chính xác nhất">
-    <meta property="og:image" content="https://mrkhangkhoi2025.github.io/tudienxodang/images/xodang-culture.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:creator" content="@tudienxodang">
-    <meta name="twitter:image" content="https://mrkhangkhoi2025.github.io/tudienxodang/images/xodang-culture.jpg">
-
-    <!-- Preconnect & Canonical -->
-    <link rel="preconnect" href="https://sheets.googleapis.com">
-    <link rel="canonical" href="https://mrkhangkhoi2025.github.io/tudienxodang/">
-    <link rel="sitemap" href="https://mrkhangkhoi2025.github.io/tudienxodang/sitemap.xml">
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer">
-
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "DefinedTermSet",
-        "name": "Từ điển Xơ Đăng - Việt",
-        "description": "Hệ thống tra cứu song ngữ Xơ Đăng - Tiếng Việt với hơn 5000 từ vựng",
-        "inLanguage": ["vi", "sed"],
-        "publisher": {
-            "@type": "Organization",
-            "name": "Từ Điển Dân Tộc",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://mrkhangkhoi2025.github.io/tudienxodang/logo.png"
-            }
-        }
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "url": "https://mrkhangkhoi2025.github.io/tudienxodang/",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://mrkhangkhoi2025.github.io/tudienxodang/?q={search_term}",
-            "query-input": "required name=search_term"
-        }
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "url": "https://mrkhangkhoi2025.github.io/tudienxodang/#intro",
-        "name": "Giới Thiệu Về Tiếng Xơ Đăng",
-        "description": "Tìm hiểu về tiếng Xơ Đăng, ngôn ngữ của dân tộc Xơ Đăng tại Việt Nam.",
-        "image": "https://mrkhangkhoi2025.github.io/tudienxodang/images/xodang-culture.jpg"
-    }
-    </script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picaball - Quản lý sân bóng</title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --transition-speed: 0.3s;
+            --primary-color: #4CAF50;
+            --hover-color: #45a049;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --card-bg: white;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--background-gradient);
-            line-height: 1.6;
-            color: var(--primary-color);
-        }
-        .navbar {
-            background: rgba(255,255,255,0.95);
-            padding: 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
+
+        /* Thêm style cho modal xác nhận */
+        .confirmation-modal {
+            position: fixed;
             top: 0;
-            z-index: 10;
-        }
-        .navbar ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-        .navbar a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color var(--transition-speed);
-        }
-        .navbar a:hover { color: var(--secondary-color); }
-        .container {
-            background: rgba(255,255,255,0.98);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 2rem;
-            max-width: 800px;
-            margin: 1rem auto;
-            backdrop-filter: blur(10px);
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
             display: none;
-            opacity: 0;
-            transition: opacity var(--transition-speed);
-        }
-        .container.active {
-            display: block;
-            opacity: 1;
-        }
-        h1, h2 { text-align: center; margin-bottom: 1.5rem; }
-        h1 { font-size: 2rem; }
-        h2 { font-size: 1.5rem; color: var(--secondary-color); }
-        .intro-content {
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        .intro-content p { margin-bottom: 1rem; }
-        .intro-content ul { list-style: none; padding: 0; }
-        .intro-content li {
-            margin-bottom: 0.5rem;
-            display: flex;
+            justify-content: center;
             align-items: center;
+            z-index: 1001;
+            animation: fadeIn 0.3s ease;
         }
-        .intro-content li i {
-            margin-right: 0.5rem;
-            color: var(--secondary-color);
-        }
-        .feature-image {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        .feature-image img {
-            max-width: 100%;
-            height: auto;
+
+        .modal-content {
+            background: white;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(-20px);
+            opacity: 0;
+            animation: slideUp 0.3s ease forwards;
         }
-        #searchForm {
+
+        .modal-message {
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            color: #555;
+            text-align: center;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .confirm-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background: var(--hover-color);
+        }
+
+        .cancel-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #d32f2f;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Giữ nguyên các style cũ */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stadiums-container {
             display: grid;
-            gap: 1rem;
-            grid-template-columns: 1fr auto;
+            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         }
-        .input-group { display: grid; gap: 0.5rem; }
-        .form-label { font-weight: 600; color: var(--primary-color); }
-        input[type="text"], select {
-            padding: 0.8rem;
+
+        .stadium-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .stadium-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px 12px;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
-        input[type="text"]:focus, select:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(52,152,219,0.2);
+
+        .input-field:focus {
             outline: none;
+            border-color: var(--primary-color);
         }
-        button {
-            padding: 0.8rem 1.8rem;
-            background: var(--secondary-color);
+
+        .button {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 5px;
+        }
+
+        .button-primary {
+            background-color: var(--primary-color);
             color: white;
             border: none;
+        }
+
+        .button-primary:hover {
+            background-color: var(--hover-color);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        .status-indicator {
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .status-available {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-busy {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .time-display {
+            font-size: 18px;
+            font-weight: 500;
+            color: #666;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .result-box {
+            padding: 20px;
+            background: #f8f9fa;
             border-radius: 8px;
-            cursor: pointer;
-            transition: background var(--transition-speed), transform var(--transition-speed);
+            margin-top: 20px;
+            font-size: 0.95em;
         }
-        button:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        .result-container {
-            margin-top: 2rem;
-            padding: 2rem;
-            background: #fff;
-            border-radius: 12px;
-            border: 2px solid var(--secondary-color);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .word-card {
-            padding: 1.5rem;
-            background: #f8fafc;
+
+        .global-notification {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            padding: 18px 30px;
             border-radius: 8px;
-            border-left: 4px solid var(--accent-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: slideIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .highlight-word {
-            font-weight: bold;
-            color: #e74c3c;
-            font-size: 1.2em;
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
-        .error {
-            color: #e74c3c;
-            padding: 1rem;
-            background: #fdeded;
-            border-radius: 8px;
-            margin: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
+
+        .success { background: #4CAF50; }
+        .error { background: #f44336; }
+
         @media (max-width: 768px) {
-            #searchForm { grid-template-columns: 1fr; }
-            .container { padding: 1.5rem; }
-            button { width: 100%; }
-            .navbar ul { flex-direction: column; gap: 1rem; }
+            .stadiums-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="#home" onclick="showSection('home')">Trang chủ</a></li>
-            <li><a href="#intro" onclick="showSection('intro')">Giới thiệu tiếng Xơ Đăng</a></li>
-        </ul>
-    </nav>
+    <!-- Thêm modal xác nhận -->
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-message" id="modalMessage"></div>
+            <div class="modal-buttons">
+                <button class="modal-button confirm-btn" id="confirmAction">Xác nhận</button>
+                <button class="modal-button cancel-btn" id="cancelAction">Hủy</button>
+            </div>
+        </div>
+    </div>
 
-    <!-- Trang chủ -->
-    <section id="home" class="container active">
-        <h1>Tra Cứu Tiếng Xơ Đăng - Tiếng Việt</h1>
-        <section class="intro-content">
-            <p>Hệ thống tra cứu song ngữ Xơ Đăng - Việt với hơn 5000 từ vựng, hỗ trợ phát âm và dịch thuật chính xác.</p>
-            <ul>
-                <li><i class="fas fa-book"></i> Hơn 5000 từ vựng chuẩn</li>
-                <li><i class="fas fa-volume-up"></i> Hỗ trợ phát âm</li>
-                <li><i class="fas fa-language"></i> Dịch thuật song ngữ</li>
-            </ul>
-        </section>
-        <form id="searchForm" role="search">
-            <div class="input-group">
-                <label for="word" class="form-label">Nhập từ cần tra</label>
-                <input type="text" id="word" placeholder="Ví dụ: ăn cơm, ka me..." autocomplete="off" list="suggestions">
-                <datalist id="suggestions"></datalist>
-            </div>
-            <div class="input-group">
-                <label for="direction" class="form-label">Hướng dịch</label>
-                <select id="direction">
-                    <option value="viet_to_ethnic">Việt → Xơ Đăng</option>
-                    <option value="ethnic_to_viet">Xơ Đăng → Việt</option>
-                </select>
-            </div>
-            <button type="submit">🔍 Tra cứu</button>
-        </form>
-        <div class="loading" id="loading" style="display:none">Đang tải...</div>
-        <section aria-live="polite">
-            <div class="result-container" id="resultContainer">
-                <div id="result"></div>
-                <div id="error" class="error" role="alert" hidden></div>
-            </div>
-        </section>
-    </section>
+    <div class="container">
+        <h1>🕹️ PICABALL - HỆ THỐNG TÍNH TIỀN</h1>
+        <div class="stadiums-container" id="stadiumsContainer"></div>
+    </div>
 
-    <!-- Trang giới thiệu -->
-    <section id="intro" class="container">
-        <h1>Giới Thiệu Về Tiếng Xơ Đăng</h1>
-        <section class="intro-content">
-            <p>Tiếng Xơ Đăng là ngôn ngữ của dân tộc Xơ Đăng, một trong 54 dân tộc anh em tại Việt Nam. Ngôn ngữ này thuộc nhóm ngôn ngữ Nam Á, chủ yếu được sử dụng tại tỉnh Kon Tum và một số khu vực lân cận như Quảng Nam và Quảng Ngãi.</p>
-            <h2>Đặc Điểm Nổi Bật</h2>
-            <ul>
-                <li><i class="fas fa-language"></i> Thuộc nhóm ngôn ngữ Môn-Khmer của ngữ hệ Nam Á.</li>
-                <li><i class="fas fa-volume-up"></i> Có hệ thống nguyên âm phong phú với 24 âm vị nguyên âm.</li>
-                <li><i class="fas fa-globe"></i> Được sử dụng chủ yếu ở tỉnh Kon Tum, Việt Nam.</li>
-                <li><i class="fas fa-users"></i> Có quan hệ gần gũi với các dân tộc như Giẻ Triêng, Co, Hrê và Ba Na.</li>
-            </ul>
-            <h2>Lịch Sử và Văn Hóa</h2>
-            <p>Người Xơ Đăng có truyền thống văn hóa đặc sắc, thể hiện qua các lễ hội, trang phục và kiến trúc độc đáo như nhà rông. Ngôn ngữ Xơ Đăng không chỉ là phương tiện giao tiếp mà còn là cầu nối văn hóa, lưu giữ những giá trị truyền thống của dân tộc.</p>
-            <div class="feature-image">
-                <img src="https://mrkhangkhoi2025.github.io/tudienxodang/images/xodang-culture.jpg" alt="Văn hóa dân tộc Xơ Đăng" loading="lazy">
-            </div>
-            <h2>Tầm Quan Trọng Của Việc Học Tiếng Xơ Đăng</h2>
-            <p>Học tiếng Xơ Đăng không chỉ giúp bảo tồn ngôn ngữ mà còn mở ra cơ hội giao lưu văn hóa, hiểu biết sâu sắc hơn về dân tộc Xơ Đăng. Với hệ thống từ điển song ngữ Xơ Đăng - Việt, việc tra cứu và học tập trở nên dễ dàng hơn bao giờ hết.</p>
-        </section>
-    </section>
-
-    <!-- JavaScript -->
     <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('.container').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-        }
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzJ9ggWhegCiaabgGcnvNxWethkq6f7vNjsF3ilUr5yxgxU0pKgONK4o2RNha8hxS13xA/exec";
+        const STADIUMS = [
+            { id: 1, name: "Sân 1", defaultRate: 80000 },
+            { id: 2, name: "Sân 2", defaultRate: 80000 },
+            { id: 3, name: "Sân 3", defaultRate: 80000 }
+        ];
 
-        showSection('home');
-
-        document.querySelectorAll('.navbar a').forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                const sectionId = this.getAttribute('href').substring(1);
-                showSection(sectionId);
-            });
-        });
-
-        (function() {
-            const config = {
-                API_KEY: 'AIzaSyD757jS4SLR7-EzrPgrW9WrLQeD2DQExHw',
-                SHEET_ID: '1Z59pDBu_tGwlYqUeS1-VJLpcHozp7LbxnC_-qhT3iHs',
-                RANGE: 'Sheet1!A2:C'
-            };
-            let dictionary = [];
-            let initialized = false;
-            const dom = {
-                searchForm: document.getElementById('searchForm'),
-                wordInput: document.getElementById('word'),
-                directionSelect: document.getElementById('direction'),
-                resultDiv: document.getElementById('result'),
-                errorDiv: document.getElementById('error'),
-                loading: document.getElementById('loading'),
-                suggestions: document.getElementById('suggestions')
-            };
-
-            function showLoading() { dom.loading.style.display = 'block'; }
-            function hideLoading() { dom.loading.style.display = 'none'; }
-            function showError(message) { dom.errorDiv.textContent = message; dom.errorDiv.hidden = false; }
-            function clearResults() { dom.resultDiv.innerHTML = ''; dom.errorDiv.hidden = true; }
-
-            async function fetchDictionary() {
-                try {
-                    showLoading();
-                    const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.SHEET_ID}/values/${config.RANGE}?key=${config.API_KEY}`;
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        if (response.status === 404) {
-                            throw new Error('Không tìm thấy bảng tính. Kiểm tra Sheet ID.');
-                        } else if (response.status === 403) {
-                            throw new Error('Không có quyền truy cập. Đảm bảo bảng tính được chia sẻ công khai.');
-                        } else {
-                            throw new Error(`Lỗi mạng: ${response.status} ${response.statusText}`);
-                        }
-                    }
-                    const data = await response.json();
-                    if (!data.values) {
-                        throw new Error('Dữ liệu không hợp lệ. Kiểm tra cấu trúc bảng tính.');
-                    }
-                    dictionary = data.values.map(row => ({
-                        ethnic: row[0]?.trim().toLowerCase(),
-                        viet: row[1]?.trim().toLowerCase(),
-                        pronunciation: row[2]?.trim()
-                    })).filter(item => item.ethnic && item.viet);
-                    initialized = true;
-                } catch (error) {
-                    showError(`Lỗi tải dữ liệu: ${error.message}`);
-                } finally {
-                    hideLoading();
-                }
+        class StadiumManager {
+            constructor(stadiums) {
+                this.stadiums = stadiums;
+                this.timers = {};
+                this.pendingAction = null;
+                this.init();
             }
 
-            function searchTerm(term) {
-                const cleanTerm = term.toLowerCase().trim();
-                return dom.directionSelect.value === 'ethnic_to_viet'
-                    ? dictionary.find(item => item.ethnic === cleanTerm)
-                    : dictionary.find(item => item.viet === cleanTerm);
+            init() {
+                this.renderStadiums();
+                this.restoreSessions();
+                this.setupEventListeners();
+                this.setupModalHandlers();
             }
 
-            function renderResult(entry) {
-                if (!entry) return '<p>Không tìm thấy kết quả</p>';
-                const isEthnicToViet = dom.directionSelect.value === 'ethnic_to_viet';
+            // Thêm xử lý modal
+            setupModalHandlers() {
+                const modal = document.getElementById('confirmationModal');
+                document.getElementById('confirmAction').addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    if(this.pendingAction) {
+                        this.pendingAction.action();
+                    }
+                });
+
+                document.getElementById('cancelAction').addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    this.pendingAction = null;
+                });
+            }
+
+            showConfirmation(message, action) {
+                this.pendingAction = { action };
+                document.getElementById('modalMessage').textContent = message;
+                document.getElementById('confirmationModal').style.display = 'flex';
+            }
+
+            // Cập nhật hàm xử lý click
+            handleStartSession(stadiumId) {
+                this.showConfirmation('Bạn có chắc muốn BẮT ĐẦU tính giờ cho sân này?', () => {
+                    const startTime = new Date();
+                    localStorage.setItem(`stadium_${stadiumId}`, JSON.stringify({
+                        startTime: startTime.toISOString(),
+                        rate: this.getInputValue(stadiumId, '.rate-input'),
+                        status: 'busy'
+                    }));
+                    this.updateUI(stadiumId, 'busy');
+                    this.startTimer(stadiumId, startTime);
+                    this.showNotification('🟢 Đã bắt đầu tính giờ!', 'success');
+                });
+            }
+
+            handleCalculate(stadiumId) {
+                this.showConfirmation('Bạn có chắc muốn TÍNH TIỀN và kết thúc phiên?', async () => {
+                    try {
+                        const session = JSON.parse(localStorage.getItem(`stadium_${stadiumId}`));
+                        if (!session) throw new Error('Không tìm thấy phiên');
+
+                        const endTime = new Date();
+                        const timeDiff = endTime - new Date(session.startTime);
+                        
+                        const totalCost = this.calculateTotalCost(stadiumId, timeDiff, session.rate);
+                        this.displayResult(stadiumId, totalCost);
+                        
+                        await this.sendToGoogleSheets({
+                            stadiumId,
+                            startTime: session.startTime,
+                            endTime: endTime.toISOString(),
+                            ...this.getProductData(stadiumId),
+                            totalCost: totalCost.totalCost
+                        });
+
+                        localStorage.removeItem(`stadium_${stadiumId}`);
+                        this.updateUI(stadiumId, 'available');
+                        clearInterval(this.timers[stadiumId]);
+                        this.showNotification('✅ Đã lưu dữ liệu lên Google Sheets!', 'success');
+
+                    } catch (error) {
+                        this.showNotification(`❌ Lỗi: ${error.message}`, 'error');
+                        console.error(error);
+                    }
+                });
+            }
+
+            // Giữ nguyên các phương thức khác không thay đổi
+            renderStadiums() {
+                const container = document.getElementById('stadiumsContainer');
+                container.innerHTML = this.stadiums.map(stadium => `
+                    <div class="stadium-card" data-stadium-id="${stadium.id}">
+                        <h2>${stadium.name}</h2>
+                        
+                        <div class="time-display" id="timer${stadium.id}">🕒 00:00:00</div>
+
+                        <div class="input-group">
+                            <label class="input-label">💵 Giá/giờ (VND):</label>
+                            <input type="number" 
+                                   class="input-field rate-input" 
+                                   value="${stadium.defaultRate}" 
+                                   min="0" 
+                                   step="1000">
+                        </div>
+
+                        ${this.renderProductInput('💧 Nước suối', 'water', 5000)}
+                        ${this.renderProductInput('🥤 Bù khoáng', 'mineral', 10000)}
+                        ${this.renderProductInput('⚽ Bóng', 'ball', 50000)}
+
+                        <div class="button-group">
+                            <button class="button button-primary start-btn">▶️ Bắt đầu</button>
+                            <button class="button button-primary calculate-btn" style="display:none;">🧮 Tính tiền</button>
+                        </div>
+
+                        <div class="status-indicator status-available" id="status${stadium.id}">
+                            🟢 Trống
+                        </div>
+
+                        <div class="result-box" id="result${stadium.id}"></div>
+                    </div>
+                `).join('');
+            }
+
+            renderProductInput(label, prefix, price) {
                 return `
-                    <div class="word-card">
-                        <p><strong>Từ:</strong> <span class="highlight-word">${isEthnicToViet ? entry.ethnic : entry.viet}</span></p>
-                        <p><strong>Nghĩa:</strong> <span class="highlight-word">${isEthnicToViet ? entry.viet : entry.ethnic}</span></p>
-                        ${entry.pronunciation ? `<p><strong>Phát âm:</strong> ${entry.pronunciation}</p>` : ''}
+                    <div class="input-group">
+                        <label class="input-label">${label}:</label>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                            <input type="number" 
+                                   class="input-field ${prefix}-quantity" 
+                                   placeholder="Số lượng" 
+                                   min="0">
+                            <input type="number" 
+                                   class="input-field ${prefix}-price" 
+                                   value="${price}" 
+                                   min="0" 
+                                   step="1000">
+                        </div>
                     </div>
                 `;
             }
 
-            function handleSearch(e) {
-                e.preventDefault();
-                if (!initialized) return showError('Dữ liệu chưa sẵn sàng');
-                const term = dom.wordInput.value.trim();
-                if (!term) return showError('Nhập từ cần tra');
-                clearResults();
-                const result = searchTerm(term);
-                dom.resultDiv.innerHTML = renderResult(result);
-            }
+            setupEventListeners() {
+                document.getElementById('stadiumsContainer').addEventListener('click', (e) => {
+                    const stadiumCard = e.target.closest('.stadium-card');
+                    if (!stadiumCard) return;
 
-            function initAutocomplete() {
-                dom.wordInput.addEventListener('input', function() {
-                    const term = this.value.toLowerCase().trim();
-                    dom.suggestions.innerHTML = '';
-                    if (term.length < 1) return;
-                    const suggestions = dictionary
-                        .filter(item => item.ethnic.includes(term) || item.viet.includes(term))
-                        .slice(0, 10);
-                    suggestions.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = dom.directionSelect.value === 'ethnic_to_viet' ? item.ethnic : item.viet;
-                        dom.suggestions.appendChild(option);
-                    });
+                    const stadiumId = parseInt(stadiumCard.dataset.stadiumId);
+                    
+                    if (e.target.classList.contains('start-btn')) {
+                        this.handleStartSession(stadiumId);
+                    } else if (e.target.classList.contains('calculate-btn')) {
+                        this.handleCalculate(stadiumId);
+                    }
+                });
+
+                document.querySelectorAll('.input-field').forEach(input => {
+                    input.addEventListener('input', () => this.validateInput(input));
                 });
             }
 
-            dom.searchForm.addEventListener('submit', handleSearch);
-            dom.directionSelect.addEventListener('change', () => dom.wordInput.value = '');
-            fetchDictionary().then(initAutocomplete);
-        })();
+            validateInput(input) {
+                const value = parseInt(input.value);
+                if (value < 0) input.value = 0;
+            }
+
+            calculateTotalCost(stadiumId, timeDiff, rate) {
+                const hours = (timeDiff / 3600000).toFixed(2);
+                const stadiumCost = Math.round(hours * rate);
+                
+                const products = {
+                    water: { qty: this.getInputValue(stadiumId, '.water-quantity'), price: this.getInputValue(stadiumId, '.water-price') },
+                    mineral: { qty: this.getInputValue(stadiumId, '.mineral-quantity'), price: this.getInputValue(stadiumId, '.mineral-price') },
+                    ball: { qty: this.getInputValue(stadiumId, '.ball-quantity'), price: this.getInputValue(stadiumId, '.ball-price') }
+                };
+
+                const productCost = Object.values(products).reduce((sum, p) => sum + (p.qty * p.price), 0);
+                
+                return {
+                    time: this.formatTime(timeDiff),
+                    stadiumCost,
+                    productCost,
+                    totalCost: stadiumCost + productCost
+                };
+            }
+
+            async sendToGoogleSheets(data) {
+                const payload = {
+                    stadiumId: data.stadiumId,
+                    startTime: data.startTime,
+                    endTime: data.endTime,
+                    waterQty: data.waterQty || 0,
+                    waterPrice: data.waterPrice || 0,
+                    mineralQty: data.mineralQty || 0,
+                    mineralPrice: data.mineralPrice || 0,
+                    ballQty: data.ballQty || 0,
+                    ballPrice: data.ballPrice || 0,
+                    totalCost: data.totalCost || 0
+                };
+
+                try {
+                    const response = await fetch(WEB_APP_URL, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'text/plain;charset=utf-8'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    const result = await response.json();
+                    if (!response.ok) throw new Error(result.message);
+                    return result;
+                } catch (error) {
+                    throw new Error(`Lỗi kết nối: ${error.message}`);
+                }
+            }
+
+            updateUI(stadiumId, status) {
+                const stadium = this.getStadiumElement(stadiumId);
+                stadium.querySelector('.start-btn').style.display = status === 'busy' ? 'none' : 'block';
+                stadium.querySelector('.calculate-btn').style.display = status === 'busy' ? 'block' : 'none';
+                stadium.querySelector('.status-indicator').className = `status-indicator status-${status}`;
+                stadium.querySelector('.status-indicator').textContent = status === 'busy' ? '🔴 Đang sử dụng' : '🟢 Trống';
+                if(status === 'available') {
+                    stadium.querySelector('.time-display').textContent = '🕒 00:00:00';
+                }
+            }
+
+            startTimer(stadiumId, startTime) {
+                const timerElement = this.getStadiumElement(stadiumId).querySelector('.time-display');
+                const update = () => {
+                    const diff = new Date() - startTime;
+                    timerElement.textContent = `🕒 ${this.formatTime(diff)}`;
+                };
+                update();
+                this.timers[stadiumId] = setInterval(update, 1000);
+            }
+
+            restoreSessions() {
+                this.stadiums.forEach(stadium => {
+                    const session = localStorage.getItem(`stadium_${stadium.id}`);
+                    if (session) {
+                        const data = JSON.parse(session);
+                        if (data.status === 'busy') {
+                            this.startTimer(stadium.id, new Date(data.startTime));
+                            this.updateUI(stadium.id, 'busy');
+                        }
+                    }
+                });
+            }
+
+            getStadiumElement(stadiumId) {
+                return document.querySelector(`[data-stadium-id="${stadiumId}"]`);
+            }
+
+            getInputValue(stadiumId, selector) {
+                return parseInt(this.getStadiumElement(stadiumId).querySelector(selector).value) || 0;
+            }
+
+            getProductData(stadiumId) {
+                return {
+                    waterQty: this.getInputValue(stadiumId, '.water-quantity'),
+                    waterPrice: this.getInputValue(stadiumId, '.water-price'),
+                    mineralQty: this.getInputValue(stadiumId, '.mineral-quantity'),
+                    mineralPrice: this.getInputValue(stadiumId, '.mineral-price'),
+                    ballQty: this.getInputValue(stadiumId, '.ball-quantity'),
+                    ballPrice: this.getInputValue(stadiumId, '.ball-price')
+                };
+            }
+
+            formatTime(ms) {
+                const pad = n => n.toString().padStart(2, '0');
+                const h = Math.floor(ms / 3600000);
+                const m = Math.floor((ms % 3600000) / 60000);
+                const s = Math.floor((ms % 60000) / 1000);
+                return `${pad(h)}:${pad(m)}:${pad(s)}`;
+            }
+
+            formatCurrency(amount) {
+                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+            }
+
+            displayResult(stadiumId, data) {
+                const resultDiv = this.getStadiumElement(stadiumId).querySelector('.result-box');
+                resultDiv.innerHTML = `
+                    <div>⏱ Thời gian: ${data.time}</div>
+                    <div>🏟 Tiền sân: ${this.formatCurrency(data.stadiumCost)}</div>
+                    <div>🛒 Phụ phí: ${this.formatCurrency(data.productCost)}</div>
+                    <div style="margin-top:15px;font-weight:bold;color:var(--primary-color);">
+                        💵 Tổng cộng: ${this.formatCurrency(data.totalCost)}
+                    </div>
+                `;
+            }
+
+            showNotification(message, type) {
+                const notification = document.createElement('div');
+                notification.className = `global-notification ${type}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 3000);
+            }
+        }
+
+        // Khởi động hệ thống
+        new StadiumManager(STADIUMS);
     </script>
 </body>
 </html>
