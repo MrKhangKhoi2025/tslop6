@@ -306,8 +306,8 @@
     </div>
 
     <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwnTg6jRGUaJZeIHUQbzBbsZ3TBh9_msNg23JkUoCYJmIfH9XlCqy1LCLS7Lb2Bre7CXQ/exec";
-        const VALID_PASSWORDS = ["tan123", "hue123", "ha123"];
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzJ9ggWhegCiaabgGcnvNxWethkq6f7vNjsF3ilUr5yxgxU0pKgONK4o2RNha8hxS13xA/exec";
+        const PASSWORD = "tan123";
         const STADIUMS = [
             { id: 1, name: "Sân 1", defaultRate: 80000 },
             { id: 2, name: "Sân 2", defaultRate: 80000 },
@@ -328,23 +328,6 @@
                 this.setupEventListeners();
                 this.setupModalHandlers();
                 this.setupPasswordHandlers();
-                this.startStatusPolling();
-            }
-
-            startStatusPolling() {
-                setInterval(() => this.fetchAllStatuses(), 3000);
-            }
-
-            async fetchAllStatuses() {
-                try {
-                    const response = await fetch(`${WEB_APP_URL}?action=getStatus`);
-                    const statuses = await response.json();
-                    statuses.forEach(status => {
-                        this.updateUI(status.stadiumId, status.status.toLowerCase());
-                    });
-                } catch (error) {
-                    console.error('Lỗi tải trạng thái:', error);
-                }
             }
 
             setupModalHandlers() {
@@ -364,7 +347,7 @@
                 const passwordModal = document.getElementById('passwordModal');
                 document.getElementById('submitPassword').addEventListener('click', () => {
                     const input = document.getElementById('passwordInput').value;
-                    if(VALID_PASSWORDS.includes(input)) {
+                    if(input === PASSWORD) {
                         passwordModal.style.display = 'none';
                         this.pendingAction?.();
                     } else {
@@ -394,16 +377,15 @@
                 this.pendingAction = action;
             }
 
-            async handleStartSession(stadiumId) {
+            handleStartSession(stadiumId) {
                 this.showConfirmation('BẮT ĐẦU tính giờ cho sân này?', () => {
-                    this.showPasswordModal(async () => {
+                    this.showPasswordModal(() => {
                         const startTime = new Date();
                         localStorage.setItem(`stadium_${stadiumId}`, JSON.stringify({
                             startTime: startTime.toISOString(),
                             rate: this.getInputValue(stadiumId, '.rate-input'),
                             status: 'busy'
                         }));
-                        await this.updateServerStatus(stadiumId, 'busy');
                         this.updateUI(stadiumId, 'busy');
                         this.startTimer(stadiumId, startTime);
                         this.showNotification('🟢 Đã bắt đầu tính giờ!', 'success');
@@ -411,7 +393,7 @@
                 });
             }
 
-            async handleCalculate(stadiumId) {
+            handleCalculate(stadiumId) {
                 this.showConfirmation('TÍNH TIỀN và kết thúc phiên?', () => {
                     this.showPasswordModal(async () => {
                         try {
@@ -433,7 +415,6 @@
                             });
 
                             localStorage.removeItem(`stadium_${stadiumId}`);
-                            await this.updateServerStatus(stadiumId, 'available');
                             this.updateUI(stadiumId, 'available');
                             clearInterval(this.timers[stadiumId]);
                             this.showNotification('✅ Đã lưu dữ liệu!', 'success');
@@ -545,24 +526,6 @@
                     if (!response.ok) throw new Error(result.message);
                 } catch (error) {
                     throw new Error(`Lỗi kết nối: ${error.message}`);
-                }
-            }
-
-            async updateServerStatus(stadiumId, status) {
-                try {
-                    const payload = {
-                        action: "updateStatus",
-                        stadiumId: stadiumId,
-                        status: status.toUpperCase()
-                    };
-
-                    await fetch(WEB_APP_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify(payload)
-                    });
-                } catch (error) {
-                    this.showNotification(`❌ Lỗi cập nhật trạng thái: ${error.message}`, 'error');
                 }
             }
 
