@@ -305,7 +305,7 @@
                         <div class="time-display" id="timer${stadium.id}"> 00:00:00</div>
                         <div class="input-group">
                             <label class="input-label"> Giá/giờ (VND):</label>
-                            <input type="number" class="input-field rate-input" value="${this.getCurrentRate()}" min="0, step="1000" readonly>
+                            <input type="number" class="input-field rate-input" value="${this.getCurrentRate()}" min="0" step="1000" readonly>
                         </div>
                         ${this.renderProductInput(' Nước suối', 'water', 5000)}
                         ${this.renderProductInput(' Bù khoáng', 'mineral', 10000)}
@@ -485,11 +485,21 @@
                                 minutesAfter16 * rateAfter16PerMinute
                             );
 
+                            // Tính toán phụ phí
+                            const productCost = productData.waterQty * productData.waterPrice +
+                                               productData.mineralQty * productData.mineralPrice +
+                                               productData.ballQty * productData.ballPrice;
+
+                            // Tính tổng cộng
+                            const totalCost = stadiumCost + productCost;
+
                             const payload = {
                                 action: "endSession",
                                 stadiumId: stadiumId,
                                 ...productData,
-                                stadiumCost: stadiumCost
+                                stadiumCost: stadiumCost,
+                                productCost: productCost,
+                                totalCost: totalCost
                             };
 
                             const response = await fetch(WEB_APP_URL, {
@@ -502,9 +512,28 @@
                             if (!response.ok) throw new Error(result.message || 'Lỗi kết thúc phiên');
 
                             // Lưu dữ liệu để in hóa đơn
-                            this.results[stadiumId] = { ...result, productData, startTime, endTime, elapsedTime, stadiumCost };
+                            this.results[stadiumId] = { 
+                                ...result, 
+                                productData, 
+                                startTime, 
+                                endTime, 
+                                elapsedTime, 
+                                stadiumCost,
+                                productCost,
+                                totalCost
+                            };
 
-                            this.displayResult(stadiumId, result);
+                            // Hiển thị kết quả
+                            this.displayResult(stadiumId, this.results[stadiumId]);
+
+                            // Dừng bộ đếm thời gian
+                            if (this.timers[stadiumId]) {
+                                clearInterval(this.timers[stadiumId].display);
+                                clearInterval(this.timers[stadiumId].sync);
+                                delete this.timers[stadiumId];
+                            }
+
+                            // Reset giao diện
                             this.resetStadiumUI(stadiumId);
                             this.showNotification(' Đã lưu dữ liệu!', 'success');
                         } catch (error) {
@@ -563,7 +592,7 @@
 
                     doc.text(`- Phu phi: ${this.formatCurrency(data.productCost)}`, 10, y);
                     y += 10;
-                    doc.text(`- Tong cong: ${this.formatCurrency(data.totalCost)}`, 10, y + 10);
+                    doc.text(`- Tong cong: ${this.formatCurrency(data.totalCost)}`, 10, y);
 
                     doc.save(`hoadon_san${stadiumId}.pdf`);
                 } catch (error) {
@@ -577,12 +606,12 @@
                     return value ? parseInt(value) : 0;
                 };
                 return {
-                    waterQty: getValue('.water-quantity'),
-                    waterPrice: getValue('.water-price'),
-                    mineralQty: getValue('.mineral-quantity'),
-                    mineralPrice: getValue('.mineral-price'),
-                    ballQty: getValue('.ball-quantity'),
-                    ballPrice: getValue('.ball-price')
+                    waterQty: Math.abs(getValue('.water-quantity')) || 0,
+                    waterPrice: Math.abs(getValue('.water-price')) || 5000,
+                    mineralQty: Math.abs(getValue('.mineral-quantity')) || 0,
+                    mineralPrice: Math.abs(getValue('.mineral-price')) || 10000,
+                    ballQty: Math.abs(getValue('.ball-quantity')) || 0,
+                    ballPrice: Math.abs(getValue('.ball-price')) || 50000
                 };
             }
 
