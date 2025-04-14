@@ -12,7 +12,6 @@
             --text-color: #333;
             --card-bg: white;
         }
-
         .confirmation-modal,
         .password-modal {
             position: fixed;
@@ -27,7 +26,6 @@
             z-index: 1001;
             animation: fadeIn 0.3s ease;
         }
-
         .modal-content {
             background: white;
             padding: 30px;
@@ -39,7 +37,6 @@
             opacity: 0;
             animation: slideUp 0.3s ease forwards;
         }
-
         .password-content {
             background: white;
             padding: 25px;
@@ -48,20 +45,17 @@
             max-width: 350px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-
         .modal-message {
             font-size: 1.1em;
             margin-bottom: 25px;
             color: #555;
             text-align: center;
         }
-
         .modal-buttons {
             display: flex;
             gap: 15px;
             justify-content: center;
         }
-
         .modal-button {
             padding: 12px 30px;
             border: none;
@@ -70,25 +64,20 @@
             font-weight: 600;
             transition: all 0.2s;
         }
-
         .confirm-btn {
             background: var(--primary-color);
             color: white;
         }
-
         .confirm-btn:hover {
             background: var(--hover-color);
         }
-
         .cancel-btn {
             background: #f44336;
             color: white;
         }
-
         .cancel-btn:hover {
             background: #d32f2f;
         }
-
         .password-input {
             width: 100%;
             padding: 12px;
@@ -97,19 +86,16 @@
             border-radius: 6px;
             font-size: 16px;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         @keyframes slideUp {
             to {
                 transform: translateY(0);
                 opacity: 1;
             }
         }
-
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -117,12 +103,10 @@
             background-color: var(--background-color);
             color: var(--text-color);
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-
         h1 {
             text-align: center;
             color: var(--primary-color);
@@ -130,13 +114,11 @@
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-
         .stadiums-container {
             display: grid;
             gap: 25px;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         }
-
         .stadium-card {
             background: var(--card-bg);
             padding: 25px;
@@ -145,22 +127,18 @@
             transition: transform 0.2s;
             position: relative;
         }
-
         .stadium-card:hover {
             transform: translateY(-3px);
         }
-
         .input-group {
             margin-bottom: 20px;
         }
-
         .input-label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
             color: #666;
         }
-
         .input-field {
             width: 100%;
             padding: 10px 12px;
@@ -169,12 +147,10 @@
             font-size: 16px;
             transition: border-color 0.3s;
         }
-
         .input-field:focus {
             outline: none;
             border-color: var(--primary-color);
         }
-
         .button {
             padding: 12px 24px;
             border-radius: 6px;
@@ -185,18 +161,15 @@
             letter-spacing: 0.5px;
             margin: 5px;
         }
-
         .button-primary {
             background-color: var(--primary-color);
             color: white;
             border: none;
         }
-
         .button-primary:hover {
             background-color: var(--hover-color);
             box-shadow: 0 3px 8px rgba(0,0,0,0.15);
         }
-
         .status-indicator {
             padding: 12px;
             border-radius: 6px;
@@ -205,17 +178,14 @@
             font-weight: 600;
             font-size: 0.9em;
         }
-
         .status-available {
             background-color: #e8f5e9;
             color: #2e7d32;
         }
-
         .status-busy {
             background-color: #ffebee;
             color: #c62828;
         }
-
         .time-display {
             font-size: 18px;
             font-weight: 500;
@@ -226,7 +196,6 @@
             text-align: center;
             margin: 15px 0;
         }
-
         .result-box {
             padding: 20px;
             background: #f8f9fa;
@@ -234,7 +203,6 @@
             margin-top: 20px;
             font-size: 0.95em;
         }
-
         .global-notification {
             position: fixed;
             top: 25px;
@@ -250,24 +218,19 @@
             align-items: center;
             gap: 12px;
         }
-
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
-
         .success { background: #4CAF50; }
         .error { background: #f44336; }
-
         @media (max-width: 768px) {
             .stadiums-container {
                 grid-template-columns: 1fr;
             }
-            
             .container {
                 padding: 0 15px;
             }
-            
             h1 {
                 font-size: 2em;
             }
@@ -275,6 +238,7 @@
     </style>
 </head>
 <body>
+    <!-- Modal xác nhận -->
     <div class="confirmation-modal" id="confirmationModal">
         <div class="modal-content">
             <div class="modal-message" id="modalMessage"></div>
@@ -284,146 +248,53 @@
             </div>
         </div>
     </div>
-
+    <!-- Modal mật khẩu -->
     <div class="password-modal" id="passwordModal">
         <div class="password-content">
             <h3 style="margin:0 0 15px;color:#333;">XÁC THỰC QUẢN TRỊ</h3>
-            <input type="password" 
-                   class="password-input" 
-                   id="passwordInput" 
-                   placeholder="Nhập mật khẩu"
-                   autocomplete="current-password">
+            <input type="password" class="password-input" id="passwordInput" placeholder="Nhập mật khẩu" autocomplete="current-password">
             <div class="modal-buttons">
                 <button class="modal-button confirm-btn" id="submitPassword">Xác nhận</button>
                 <button class="modal-button cancel-btn" id="cancelPassword">Hủy</button>
             </div>
         </div>
     </div>
-
+    <!-- Nội dung chính -->
     <div class="container">
-        <h1>🕹️ PICABALL - HỆ THỐNG TÍNH TIỀN</h1>
+        <h1> PICABALL - HỆ THỐNG TÍNH TIỀN</h1>
         <div class="stadiums-container" id="stadiumsContainer"></div>
     </div>
-
+    <!-- Thêm thư viện jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzJ9ggWhegCiaabgGcnvNxWethkq6f7vNjsF3ilUr5yxgxU0pKgONK4o2RNha8hxS13xA/exec";
-        const PASSWORD = "tan123";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxKHu4ucYkwvFzu3vtN6lK5asNU82lwOTPUyUbxGXswytAtKhnBbf4p7pPiPnHpEf80eQ/exec";
+        const VALID_PASSWORDS = ["tan123", "hue123", "ha123"];
         const STADIUMS = [
             { id: 1, name: "Sân 1", defaultRate: 80000 },
             { id: 2, name: "Sân 2", defaultRate: 80000 },
             { id: 3, name: "Sân 3", defaultRate: 80000 }
         ];
 
+        // Giá theo khung giờ
+        const rateBefore16PerMinute = 60000 / 60; // 1000 VND/phút
+        const rateAfter16PerMinute = 80000 / 60; // ~1333.333 VND/phút
+
         class StadiumManager {
             constructor(stadiums) {
                 this.stadiums = stadiums;
                 this.timers = {};
+                this.startTimes = {};
+                this.results = {}; // Lưu trữ dữ liệu để in hóa đơn
                 this.pendingAction = null;
                 this.init();
             }
 
-            init() {
+            async init() {
                 this.renderStadiums();
-                this.restoreSessions();
                 this.setupEventListeners();
                 this.setupModalHandlers();
                 this.setupPasswordHandlers();
-            }
-
-            setupModalHandlers() {
-                const modal = document.getElementById('confirmationModal');
-                document.getElementById('confirmAction').addEventListener('click', () => {
-                    modal.style.display = 'none';
-                    this.pendingAction?.action();
-                });
-
-                document.getElementById('cancelAction').addEventListener('click', () => {
-                    modal.style.display = 'none';
-                    this.pendingAction = null;
-                });
-            }
-
-            setupPasswordHandlers() {
-                const passwordModal = document.getElementById('passwordModal');
-                document.getElementById('submitPassword').addEventListener('click', () => {
-                    const input = document.getElementById('passwordInput').value;
-                    if(input === PASSWORD) {
-                        passwordModal.style.display = 'none';
-                        this.pendingAction?.();
-                    } else {
-                        this.showNotification('❌ Mật khẩu không đúng!', 'error');
-                        passwordModal.style.display = 'none';
-                    }
-                });
-
-                document.getElementById('cancelPassword').addEventListener('click', () => {
-                    passwordModal.style.display = 'none';
-                });
-
-                document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-                    if(e.key === 'Enter') document.getElementById('submitPassword').click();
-                });
-            }
-
-            showConfirmation(message, action) {
-                document.getElementById('modalMessage').textContent = message;
-                document.getElementById('confirmationModal').style.display = 'flex';
-                this.pendingAction = { action };
-            }
-
-            showPasswordModal(action) {
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordModal').style.display = 'flex';
-                this.pendingAction = action;
-            }
-
-            handleStartSession(stadiumId) {
-                this.showConfirmation('BẮT ĐẦU tính giờ cho sân này?', () => {
-                    this.showPasswordModal(() => {
-                        const startTime = new Date();
-                        localStorage.setItem(`stadium_${stadiumId}`, JSON.stringify({
-                            startTime: startTime.toISOString(),
-                            rate: this.getInputValue(stadiumId, '.rate-input'),
-                            status: 'busy'
-                        }));
-                        this.updateUI(stadiumId, 'busy');
-                        this.startTimer(stadiumId, startTime);
-                        this.showNotification('🟢 Đã bắt đầu tính giờ!', 'success');
-                    });
-                });
-            }
-
-            handleCalculate(stadiumId) {
-                this.showConfirmation('TÍNH TIỀN và kết thúc phiên?', () => {
-                    this.showPasswordModal(async () => {
-                        try {
-                            const session = JSON.parse(localStorage.getItem(`stadium_${stadiumId}`));
-                            if (!session) throw new Error('Không tìm thấy phiên');
-
-                            const endTime = new Date();
-                            const timeDiff = endTime - new Date(session.startTime);
-                            
-                            const totalCost = this.calculateTotalCost(stadiumId, timeDiff, session.rate);
-                            this.displayResult(stadiumId, totalCost);
-                            
-                            await this.sendToGoogleSheets({
-                                stadiumId,
-                                startTime: session.startTime,
-                                endTime: endTime.toISOString(),
-                                ...this.getProductData(stadiumId),
-                                totalCost: totalCost.totalCost
-                            });
-
-                            localStorage.removeItem(`stadium_${stadiumId}`);
-                            this.updateUI(stadiumId, 'available');
-                            clearInterval(this.timers[stadiumId]);
-                            this.showNotification('✅ Đã lưu dữ liệu!', 'success');
-
-                        } catch (error) {
-                            this.showNotification(`❌ Lỗi: ${error.message}`, 'error');
-                        }
-                    });
-                });
+                await this.initializeTimers();
             }
 
             renderStadiums() {
@@ -431,26 +302,28 @@
                 container.innerHTML = this.stadiums.map(stadium => `
                     <div class="stadium-card" data-stadium-id="${stadium.id}">
                         <h2>${stadium.name}</h2>
-                        <div class="time-display" id="timer${stadium.id}">🕒 00:00:00</div>
+                        <div class="time-display" id="timer${stadium.id}"> 00:00:00</div>
                         <div class="input-group">
-                            <label class="input-label">💵 Giá/giờ (VND):</label>
-                            <input type="number" 
-                                   class="input-field rate-input" 
-                                   value="${stadium.defaultRate}" 
-                                   min="0" 
-                                   step="1000">
+                            <label class="input-label"> Giá/giờ (VND):</label>
+                            <input type="number" class="input-field rate-input" value="${this.getCurrentRate()}" min="0, step="1000" readonly>
                         </div>
-                        ${this.renderProductInput('💧 Nước suối', 'water', 5000)}
-                        ${this.renderProductInput('🥤 Bù khoáng', 'mineral', 10000)}
-                        ${this.renderProductInput('⚽ Bóng', 'ball', 50000)}
+                        ${this.renderProductInput(' Nước suối', 'water', 5000)}
+                        ${this.renderProductInput(' Bù khoáng', 'mineral', 10000)}
+                        ${this.renderProductInput(' Bóng', 'ball', 50000)}
                         <div class="button-group">
-                            <button class="button button-primary start-btn">▶️ Bắt đầu</button>
-                            <button class="button button-primary calculate-btn" style="display:none;">🧮 Tính tiền</button>
+                            <button class="button button-primary start-btn"> Bắt đầu</button>
+                            <button class="button button-primary calculate-btn" style="display:none;"> Tính tiền</button>
                         </div>
-                        <div class="status-indicator status-available" id="status${stadium.id}">🟢 Trống</div>
+                        <div class="status-indicator status-available" id="status${stadium.id}"> Trống</div>
                         <div class="result-box" id="result${stadium.id}"></div>
                     </div>
                 `).join('');
+            }
+
+            getCurrentRate() {
+                const now = new Date();
+                const currentHour = now.getHours();
+                return currentHour < 16 ? 60000 : 80000;
             }
 
             renderProductInput(label, prefix, price) {
@@ -473,6 +346,7 @@
                     
                     if (e.target.classList.contains('start-btn')) this.handleStartSession(stadiumId);
                     if (e.target.classList.contains('calculate-btn')) this.handleCalculate(stadiumId);
+                    if (e.target.classList.contains('print-btn')) this.handlePrintInvoice(stadiumId);
                 });
 
                 document.querySelectorAll('.input-field').forEach(input => {
@@ -484,85 +358,285 @@
                 if (parseInt(input.value) < 0) input.value = 0;
             }
 
-            calculateTotalCost(stadiumId, timeDiff, rate) {
-                const hours = (timeDiff / 3600000).toFixed(2);
-                const stadiumCost = Math.round(hours * rate);
-                const products = {
-                    water: this.getProductValues(stadiumId, 'water'),
-                    mineral: this.getProductValues(stadiumId, 'mineral'),
-                    ball: this.getProductValues(stadiumId, 'ball')
-                };
-                const productCost = Object.values(products).reduce((sum, p) => sum + (p.qty * p.price), 0);
-                
-                return {
-                    time: this.formatTime(timeDiff),
-                    stadiumCost,
-                    productCost,
-                    totalCost: stadiumCost + productCost
-                };
+            setupModalHandlers() {
+                const modal = document.getElementById('confirmationModal');
+                document.getElementById('confirmAction').addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    this.pendingAction?.action();
+                });
+
+                document.getElementById('cancelAction').addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    this.pendingAction = null;
+                });
             }
 
-            async sendToGoogleSheets(data) {
-                const payload = {
-                    stadiumId: data.stadiumId,
-                    startTime: data.startTime,
-                    endTime: data.endTime,
-                    waterQty: data.waterQty || 0,
-                    waterPrice: data.waterPrice || 0,
-                    mineralQty: data.mineralQty || 0,
-                    mineralPrice: data.mineralPrice || 0,
-                    ballQty: data.ballQty || 0,
-                    ballPrice: data.ballPrice || 0,
-                    totalCost: data.totalCost || 0
-                };
+            setupPasswordHandlers() {
+                const passwordModal = document.getElementById('passwordModal');
+                document.getElementById('submitPassword').addEventListener('click', () => {
+                    const input = document.getElementById('passwordInput').value;
+                    if (VALID_PASSWORDS.includes(input)) {
+                        passwordModal.style.display = 'none';
+                        this.pendingAction?.();
+                    } else {
+                        this.showNotification(' Mật khẩu không đúng!', 'error');
+                        passwordModal.style.display = 'none';
+                    }
+                });
 
+                document.getElementById('cancelPassword').addEventListener('click', () => {
+                    passwordModal.style.display = 'none';
+                });
+
+                document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') document.getElementById('submitPassword').click();
+                });
+            }
+
+            showConfirmation(message, action) {
+                document.getElementById('modalMessage').textContent = message;
+                document.getElementById('confirmationModal').style.display = 'flex';
+                this.pendingAction = { action };
+            }
+
+            showPasswordModal(action) {
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordModal').style.display = 'flex';
+                this.pendingAction = action;
+            }
+
+            async initializeTimers() {
                 try {
-                    const response = await fetch(WEB_APP_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify(payload)
+                    const response = await fetch(`${WEB_APP_URL}?action=getAllStatus`);
+                    const statuses = await response.json();
+                    statuses.forEach(status => {
+                        if (status.status === 'BUSY' && status.startTime) {
+                            this.startTimes[status.stadiumId] = new Date(status.startTime).getTime();
+                            this.startTimer(status.stadiumId);
+                        }
+                        this.updateUI(status.stadiumId, status.status.toLowerCase());
                     });
-                    const result = await response.json();
-                    if (!response.ok) throw new Error(result.message);
                 } catch (error) {
-                    throw new Error(`Lỗi kết nối: ${error.message}`);
+                    this.showNotification(' Lỗi tải trạng thái ban đầu!', 'error');
                 }
             }
 
-            getProductValues(stadiumId, prefix) {
-                return {
-                    qty: this.getInputValue(stadiumId, `.${prefix}-quantity`),
-                    price: this.getInputValue(stadiumId, `.${prefix}-price`)
-                };
-            }
+            async handleStartSession(stadiumId) {
+                this.showConfirmation('BẮT ĐẦU tính giờ cho sân này?', () => {
+                    this.showPasswordModal(async () => {
+                        try {
+                            const payload = {
+                                action: "startSession",
+                                stadiumId: stadiumId,
+                                rate: this.getCurrentRate()
+                            };
 
-            updateUI(stadiumId, status) {
-                const stadium = this.getStadiumElement(stadiumId);
-                stadium.querySelector('.start-btn').style.display = status === 'busy' ? 'none' : 'block';
-                stadium.querySelector('.calculate-btn').style.display = status === 'busy' ? 'block' : 'none';
-                stadium.querySelector('.status-indicator').className = `status-indicator status-${status}`;
-                stadium.querySelector('.status-indicator').textContent = status === 'busy' ? '🔴 Đang sử dụng' : '🟢 Trống';
-                if(status === 'available') stadium.querySelector('.time-display').textContent = '🕒 00:00:00';
-            }
+                            const response = await fetch(WEB_APP_URL, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                                body: JSON.stringify(payload)
+                            });
 
-            startTimer(stadiumId, startTime) {
-                const timerElement = this.getStadiumElement(stadiumId).querySelector('.time-display');
-                const update = () => {
-                    const diff = new Date() - startTime;
-                    timerElement.textContent = `🕒 ${this.formatTime(diff)}`;
-                };
-                update();
-                this.timers[stadiumId] = setInterval(update, 1000);
-            }
+                            if (!response.ok) throw new Error('Lỗi khởi tạo phiên');
 
-            restoreSessions() {
-                this.stadiums.forEach(stadium => {
-                    const session = localStorage.getItem(`stadium_${stadium.id}`);
-                    if (session && JSON.parse(session).status === 'busy') {
-                        this.startTimer(stadium.id, new Date(JSON.parse(session).startTime));
-                        this.updateUI(stadium.id, 'busy');
-                    }
+                            const now = new Date().getTime();
+                            this.startTimes[stadiumId] = now;
+                            this.startTimer(stadiumId);
+                            this.updateUI(stadiumId, 'busy');
+                            this.showNotification(' Đã bắt đầu tính giờ!', 'success');
+                        } catch (error) {
+                            this.showNotification(` Lỗi: ${error.message}`, 'error');
+                        }
+                    });
                 });
+            }
+
+            async handleCalculate(stadiumId) {
+                this.showConfirmation('TÍNH TIỀN và kết thúc phiên?', () => {
+                    this.showPasswordModal(async () => {
+                        try {
+                            const productData = this.getProductData(stadiumId);
+                            const startTime = this.startTimes[stadiumId];
+                            const endTime = new Date().getTime();
+                            const elapsedTime = endTime - startTime;
+
+                            // Tính toán tiền sân dựa trên khung giờ
+                            const startDate = new Date(startTime);
+                            const endDate = new Date(endTime);
+                            const splitTime = new Date(startDate);
+                            splitTime.setHours(16, 0, 0, 0); // Thời điểm chia khung giờ (16:00)
+
+                            let minutesBefore16 = 0;
+                            let minutesAfter16 = 0;
+
+                            if (startDate < splitTime) {
+                                if (endDate <= splitTime) {
+                                    minutesBefore16 = elapsedTime / 60000;
+                                } else {
+                                    minutesBefore16 = (splitTime - startDate) / 60000;
+                                    minutesAfter16 = (endDate - splitTime) / 60000;
+                                }
+                            } else {
+                                minutesAfter16 = elapsedTime / 60000;
+                            }
+
+                            const stadiumCost = Math.round(
+                                minutesBefore16 * rateBefore16PerMinute +
+                                minutesAfter16 * rateAfter16PerMinute
+                            );
+
+                            const payload = {
+                                action: "endSession",
+                                stadiumId: stadiumId,
+                                ...productData,
+                                stadiumCost: stadiumCost
+                            };
+
+                            const response = await fetch(WEB_APP_URL, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                                body: JSON.stringify(payload)
+                            });
+
+                            const result = await response.json();
+                            if (!response.ok) throw new Error(result.message || 'Lỗi kết thúc phiên');
+
+                            // Lưu dữ liệu để in hóa đơn
+                            this.results[stadiumId] = { ...result, productData, startTime, endTime, elapsedTime, stadiumCost };
+
+                            this.displayResult(stadiumId, result);
+                            this.resetStadiumUI(stadiumId);
+                            this.showNotification(' Đã lưu dữ liệu!', 'success');
+                        } catch (error) {
+                            this.showNotification(` Lỗi: ${error.message}`, 'error');
+                        }
+                    });
+                });
+            }
+
+            handlePrintInvoice(stadiumId) {
+                try {
+                    const data = this.results[stadiumId];
+                    if (!data) {
+                        this.showNotification(' Không có dữ liệu để in!', 'error');
+                        return;
+                    }
+
+                    const { jsPDF } = window.jspdf;
+                    if (!jsPDF) {
+                        this.showNotification(' Lỗi: Thư viện PDF chưa tải!', 'error');
+                        return;
+                    }
+
+                    const doc = new jsPDF();
+
+                    const stadiumName = this.stadiums.find(s => s.id === stadiumId).name;
+                    const startTimeStr = new Date(data.startTime).toLocaleString('vi-VN');
+                    const endTimeStr = new Date(data.endTime).toLocaleString('vi-VN');
+
+                    doc.setFontSize(18);
+                    doc.text('HOA DON SAN BONG', 10, 10);
+                    doc.setFontSize(12);
+                    doc.text(`- San: ${stadiumName}`, 10, 20);
+                    doc.text(`- Thoi gian bat dau: ${startTimeStr}`, 10, 30);
+                    doc.text(`- Thoi gian ket thuc: ${endTimeStr}`, 10, 40);
+                    doc.text(`- Thoi gian su dung: ${this.formatTime(data.elapsedTime)}`, 10, 50);
+                    doc.text(`- Tien san: ${this.formatCurrency(data.stadiumCost)}`, 10, 60);
+
+                    let y = 70;
+                    if (data.productData) {
+                        doc.text('Chi tiet:', 10, y);
+                        y += 10;
+                        if (data.productData.waterQty > 0) {
+                            doc.text(`- Nuoc suoi: ${data.productData.waterQty} x ${this.formatCurrency(data.productData.waterPrice)}`, 10, y);
+                            y += 10;
+                        }
+                        if (data.productData.mineralQty > 0) {
+                            doc.text(`- Bu khoang: ${data.productData.mineralQty} x ${this.formatCurrency(data.productData.mineralPrice)}`, 10, y);
+                            y += 10;
+                        }
+                        if (data.productData.ballQty > 0) {
+                            doc.text(`- Bong: ${data.productData.ballQty} x ${this.formatCurrency(data.productData.ballPrice)}`, 10, y);
+                            y += 10;
+                        }
+                    }
+
+                    doc.text(`- Phu phi: ${this.formatCurrency(data.productCost)}`, 10, y);
+                    y += 10;
+                    doc.text(`- Tong cong: ${this.formatCurrency(data.totalCost)}`, 10, y + 10);
+
+                    doc.save(`hoadon_san${stadiumId}.pdf`);
+                } catch (error) {
+                    this.showNotification(` Lỗi khi tạo PDF: ${error.message}`, 'error');
+                }
+            }
+
+            getProductData(stadiumId) {
+                const getValue = (selector) => {
+                    const value = this.getStadiumElement(stadiumId).querySelector(selector).value;
+                    return value ? parseInt(value) : 0;
+                };
+                return {
+                    waterQty: getValue('.water-quantity'),
+                    waterPrice: getValue('.water-price'),
+                    mineralQty: getValue('.mineral-quantity'),
+                    mineralPrice: getValue('.mineral-price'),
+                    ballQty: getValue('.ball-quantity'),
+                    ballPrice: getValue('.ball-price')
+                };
+            }
+
+            startTimer(stadiumId) {
+                const timerElement = this.getStadiumElement(stadiumId).querySelector('.time-display');
+
+                const updateTimer = () => {
+                    const now = new Date().getTime();
+                    const startTime = this.startTimes[stadiumId];
+                    if (!startTime) {
+                        timerElement.textContent = ' Lỗi thời gian';
+                        return;
+                    }
+                    const elapsedTime = now - startTime;
+                    timerElement.textContent = ` ${this.formatTime(elapsedTime)}`;
+                };
+
+                const syncWithServer = async () => {
+                    try {
+                        const response = await fetch(`${WEB_APP_URL}?action=getAllStatus`);
+                        const statuses = await response.json();
+                        const status = statuses.find(s => s.stadiumId === stadiumId);
+                        if (status && status.status === 'BUSY' && status.startTime) {
+                            const serverStartTime = new Date(status.startTime).getTime();
+                            if (serverStartTime !== this.startTimes[stadiumId]) {
+                                this.startTimes[stadiumId] = serverStartTime;
+                            }
+                        }
+                    } catch (error) {
+                        console.error(`Lỗi đồng bộ thời gian: ${error}`);
+                    }
+                };
+
+                if (this.timers[stadiumId]) {
+                    clearInterval(this.timers[stadiumId].display);
+                    clearInterval(this.timers[stadiumId].sync);
+                }
+
+                this.timers[stadiumId] = {
+                    display: setInterval(updateTimer, 1000),
+                    sync: setInterval(syncWithServer, 3000)
+                };
+                updateTimer();
+                syncWithServer();
+            }
+
+            resetStadiumUI(stadiumId) {
+                const stadium = this.getStadiumElement(stadiumId);
+                stadium.querySelector('.start-btn').style.display = 'block';
+                stadium.querySelector('.calculate-btn').style.display = 'none';
+                stadium.querySelector('.status-indicator').className = 'status-indicator status-available';
+                stadium.querySelector('.status-indicator').textContent = ' Trống';
+                stadium.querySelector('.time-display').textContent = ' 00:00:00';
+                // Không xóa phần result-box để giữ lại hiển thị số tiền và nút in
             }
 
             getStadiumElement(stadiumId) {
@@ -570,21 +644,12 @@
             }
 
             getInputValue(stadiumId, selector) {
-                return parseInt(this.getStadiumElement(stadiumId).querySelector(selector).value) || 0;
-            }
-
-            getProductData(stadiumId) {
-                return {
-                    waterQty: this.getInputValue(stadiumId, '.water-quantity'),
-                    waterPrice: this.getInputValue(stadiumId, '.water-price'),
-                    mineralQty: this.getInputValue(stadiumId, '.mineral-quantity'),
-                    mineralPrice: this.getInputValue(stadiumId, '.mineral-price'),
-                    ballQty: this.getInputValue(stadiumId, '.ball-quantity'),
-                    ballPrice: this.getInputValue(stadiumId, '.ball-price')
-                };
+                const value = this.getStadiumElement(stadiumId).querySelector(selector).value;
+                return value ? parseInt(value) : 0;
             }
 
             formatTime(ms) {
+                if (!ms) return '00:00:00';
                 const pad = n => n.toString().padStart(2, '0');
                 const h = Math.floor(ms / 3600000);
                 const m = Math.floor((ms % 3600000) / 60000);
@@ -593,18 +658,20 @@
             }
 
             formatCurrency(amount) {
+                if (!amount) return '0 ₫';
                 return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
             }
 
             displayResult(stadiumId, data) {
                 const resultDiv = this.getStadiumElement(stadiumId).querySelector('.result-box');
                 resultDiv.innerHTML = `
-                    <div>⏱ Thời gian: ${data.time}</div>
-                    <div>🏟 Tiền sân: ${this.formatCurrency(data.stadiumCost)}</div>
-                    <div>🛒 Phụ phí: ${this.formatCurrency(data.productCost)}</div>
+                    <div> Thời gian: ${this.formatTime(data.elapsedTime)}</div>
+                    <div> Tiền sân: ${this.formatCurrency(data.stadiumCost)}</div>
+                    <div> Phụ phí: ${this.formatCurrency(data.productCost)}</div>
                     <div style="margin-top:15px;font-weight:bold;color:var(--primary-color);">
-                        💵 Tổng cộng: ${this.formatCurrency(data.totalCost)}
+                         Tổng cộng: ${this.formatCurrency(data.totalCost)}
                     </div>
+                    <button class="button button-primary print-btn"> In hóa đơn</button>
                 `;
             }
 
@@ -614,6 +681,14 @@
                 notification.textContent = message;
                 document.body.appendChild(notification);
                 setTimeout(() => notification.remove(), 3000);
+            }
+
+            updateUI(stadiumId, status) {
+                const stadium = this.getStadiumElement(stadiumId);
+                stadium.querySelector('.start-btn').style.display = status === 'busy' ? 'none' : 'block';
+                stadium.querySelector('.calculate-btn').style.display = status === 'busy' ? 'block' : 'none';
+                stadium.querySelector('.status-indicator').className = `status-indicator status-${status}`;
+                stadium.querySelector('.status-indicator').textContent = status === 'busy' ? ' Đang sử dụng' : ' Trống';
             }
         }
 
