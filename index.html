@@ -196,6 +196,17 @@
             text-align: center;
             margin: 15px 0;
         }
+        .revenue-display {
+            font-size: 16px;
+            font-weight: 500;
+            color: #2196F3;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 6px;
+            text-align: center;
+            margin: 10px 0;
+            border-left: 4px solid #2196F3;
+        }
         .result-box {
             padding: 20px;
             background: #f8f9fa;
@@ -267,7 +278,7 @@
     <!-- Thêm thư viện jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxKHu4ucYkwvFzu3vtN6lK5asNU82lwOTPUyUbxGXswytAtKhnBbf4p7pPiPnHpEf80eQ/exec";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwF4uRytt5gJoYahRhyAkqp7-t5eo1Z1iepZ216uA-LRdNA1KIJcvWaFrOTYmb76pOlWQ/exec"; // Thay bằng URL Web App của bạn
         const VALID_PASSWORDS = ["tan123", "hue123", "ha123"];
         const STADIUMS = [
             { id: 1, name: "Sân 1", defaultRate: 80000 },
@@ -285,11 +296,13 @@
                 this.timers = {};
                 this.startTimes = {};
                 this.results = {}; // Lưu trữ dữ liệu để in hóa đơn
+                this.revenueData = {}; // Lưu trữ dữ liệu doanh thu
                 this.pendingAction = null;
                 this.init();
             }
 
             async init() {
+                await this.fetchRevenueData(); // Lấy dữ liệu doanh thu trước khi render
                 this.renderStadiums();
                 this.setupEventListeners();
                 this.setupModalHandlers();
@@ -297,11 +310,23 @@
                 await this.initializeTimers();
             }
 
+            async fetchRevenueData() {
+                try {
+                    const response = await fetch(`${WEB_APP_URL}?action=getRevenue`);
+                    if (!response.ok) throw new Error('Lỗi tải dữ liệu doanh thu');
+                    this.revenueData = await response.json();
+                } catch (error) {
+                    this.showNotification('Lỗi tải dữ liệu doanh thu!', 'error');
+                    console.error(error);
+                }
+            }
+
             renderStadiums() {
                 const container = document.getElementById('stadiumsContainer');
                 container.innerHTML = this.stadiums.map(stadium => `
                     <div class="stadium-card" data-stadium-id="${stadium.id}">
                         <h2>${stadium.name}</h2>
+                        <div class="revenue-display">Doanh thu: ${this.formatCurrency(this.revenueData[stadium.name] || 0)}</div>
                         <div class="time-display" id="timer${stadium.id}"> 00:00:00</div>
                         <div class="input-group">
                             <label class="input-label"> Giá/giờ (VND):</label>
@@ -485,21 +510,11 @@
                                 minutesAfter16 * rateAfter16PerMinute
                             );
 
-                            // Tính toán phụ phí
-                            const productCost = productData.waterQty * productData.waterPrice +
-                                               productData.mineralQty * productData.mineralPrice +
-                                               productData.ballQty * productData.ballPrice;
-
-                            // Tính tổng cộng
-                            const totalCost = stadiumCost + productCost;
-
                             const payload = {
                                 action: "endSession",
                                 stadiumId: stadiumId,
                                 ...productData,
-                                stadiumCost: stadiumCost,
-                                productCost: productCost,
-                                totalCost: totalCost
+                                stadiumCost: stadiumCost
                             };
 
                             const response = await fetch(WEB_APP_URL, {
@@ -518,9 +533,7 @@
                                 startTime, 
                                 endTime, 
                                 elapsedTime, 
-                                stadiumCost,
-                                productCost,
-                                totalCost
+                                stadiumCost 
                             };
 
                             // Hiển thị kết quả
@@ -592,7 +605,7 @@
 
                     doc.text(`- Phu phi: ${this.formatCurrency(data.productCost)}`, 10, y);
                     y += 10;
-                    doc.text(`- Tong cong: ${this.formatCurrency(data.totalCost)}`, 10, y);
+                    doc.text(`- Tong cong: ${this.formatCurrency(data.totalCost)}`, 10, y + 10);
 
                     doc.save(`hoadon_san${stadiumId}.pdf`);
                 } catch (error) {
@@ -606,12 +619,12 @@
                     return value ? parseInt(value) : 0;
                 };
                 return {
-                    waterQty: Math.abs(getValue('.water-quantity')) || 0,
-                    waterPrice: Math.abs(getValue('.water-price')) || 5000,
-                    mineralQty: Math.abs(getValue('.mineral-quantity')) || 0,
-                    mineralPrice: Math.abs(getValue('.mineral-price')) || 10000,
-                    ballQty: Math.abs(getValue('.ball-quantity')) || 0,
-                    ballPrice: Math.abs(getValue('.ball-price')) || 50000
+                    waterQty: getValue('.water-quantity'),
+                    waterPrice: getValue('.water-price'),
+                    mineralQty: getValue('.mineral-quantity'),
+                    mineralPrice: getValue('.mineral-price'),
+                    ballQty: getValue('.ball-quantity'),
+                    ballPrice: getValue('.ball-price')
                 };
             }
 
