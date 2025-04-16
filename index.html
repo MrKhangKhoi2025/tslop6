@@ -196,6 +196,20 @@
             text-align: center;
             margin: 15px 0;
         }
+        .revenue-display {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-color);
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            text-align: center;
+            margin: 15px 0;
+        }
+        .revenue-display span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
         .result-box {
             padding: 20px;
             background: #f8f9fa;
@@ -267,7 +281,7 @@
     <!-- Thêm thư viện jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw_8z-PzpHlBDA00ivibOC2N1jetPi3lybcPSwMwKkyf95ZvgjVYarFjwrLjIiX1niEGA/exec";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyVin8_x1VYjmQgjIi14slcLgOwWVVDuEM_gJohWjWjYX7vuFD4hsU8Gh5ozQmoOmGT4A/exec";
         const VALID_PASSWORDS = ["tan123", "hue123", "ha123"];
         const STADIUMS = [
             { id: 1, name: "Sân 1", defaultRate: 80000 },
@@ -278,23 +292,55 @@
         // Giá theo khung giờ
         const rateBefore16PerMinute = 60000 / 60; // 1000 VND/phút
         const rateAfter16PerMinute = 80000 / 60; // ~1333.333 VND/phút
+        const MINIMUM_STADIUM_COST = 1000; // Giá tối thiểu để tránh stadiumCost = 0
 
         class StadiumManager {
             constructor(stadiums) {
                 this.stadiums = stadiums;
                 this.timers = {};
                 this.startTimes = {};
-                this.results = {}; // Lưu trữ dữ liệu để in hóa đơn
+                this.results = {};
+                this.totalRevenue = {};
                 this.pendingAction = null;
                 this.init();
             }
 
             async init() {
+                await this.fetchTotalRevenue();
                 this.renderStadiums();
                 this.setupEventListeners();
                 this.setupModalHandlers();
                 this.setupPasswordHandlers();
                 await this.initializeTimers();
+            }
+
+            async fetchTotalRevenue() {
+                try {
+                    const response = await fetch(`${WEB_APP_URL}?action=getTotalRevenue`);
+                    if (!response.ok) {
+                        throw new Error("Không thể kết nối đến server");
+                    }
+                    const revenues = await response.json();
+                    if (!Array.isArray(revenues)) {
+                        throw new Error("Dữ liệu tổng thu nhập không hợp lệ");
+                    }
+                    revenues.forEach(({ stadiumId, value }) => {
+                        if (stadiumId && value !== undefined) {
+                            this.totalRevenue[stadiumId] = value;
+                        }
+                    });
+                    // Đảm bảo tất cả sân có giá trị mặc định
+                    this.stadiums.forEach(stadium => {
+                        if (this.totalRevenue[stadium.id] === undefined) {
+                            this.totalRevenue[stadium.id] = 0;
+                        }
+                    });
+                } catch (error) {
+                    this.showNotification(` Không tải được tổng thu nhập: ${error.message}`, 'error');
+                    this.stadiums.forEach(stadium => {
+                        this.totalRevenue[stadium.id] = 0;
+                    });
+                }
             }
 
             renderStadiums() {
@@ -303,6 +349,7 @@
                     <div class="stadium-card" data-stadium-id="${stadium.id}">
                         <h2>${stadium.name}</h2>
                         <div class="time-display" id="timer${stadium.id}"> 00:00:00</div>
+                        <div class="revenue-display">Tổng tiền: <span>${this.formatCurrency(this.totalRevenue[stadium.id] || 0)}</span></div>
                         <div class="input-group">
                             <label class="input-label"> Giá/giờ (VND):</label>
                             <input type="number" class="input-field rate-input" value="${this.getCurrentRate()}" min="0" step="1000" readonly>
@@ -408,6 +455,9 @@
             async initializeTimers() {
                 try {
                     const response = await fetch(`${WEB_APP_URL}?action=getAllStatus`);
+                    if (!response.ok) {
+                        throw new Error("Không thể tải trạng thái sân");
+                    }
                     const statuses = await response.json();
                     statuses.forEach(status => {
                         if (status.status === 'BUSY' && status.startTime) {
@@ -417,7 +467,7 @@
                         this.updateUI(status.stadiumId, status.status.toLowerCase());
                     });
                 } catch (error) {
-                    this.showNotification(' Lỗi tải trạng thái ban đầu!', 'error');
+                    this.showNotification(` Lỗi tải trạng thái sân: ${error.message}`, 'error');
                 }
             }
 
@@ -425,6 +475,10 @@
                 this.showConfirmation('BẮT ĐẦU tính giờ cho sân này?', () => {
                     this.showPasswordModal(async () => {
                         try {
+                            // Xóa dữ liệu result-box trước khi bắt đầu phiên mới
+                            const resultDiv = this.getStadiumElement(stadiumId).querySelector('.result-box');
+                            resultDiv.innerHTML = '';
+
                             const payload = {
                                 action: "startSession",
                                 stadiumId: stadiumId,
@@ -437,7 +491,14 @@
                                 body: JSON.stringify(payload)
                             });
 
-                            if (!response.ok) throw new Error('Lỗi khởi tạo phiên');
+                            if (!response.ok) {
+                                throw new Error('Không thể kết nối đến server');
+                            }
+
+                            const result = await response.json();
+                            if (result.status !== "success") {
+                                throw new Error(result.message || 'Lỗi khởi tạo phiên');
+                            }
 
                             const now = new Date().getTime();
                             this.startTimes[stadiumId] = now;
@@ -445,7 +506,7 @@
                             this.updateUI(stadiumId, 'busy');
                             this.showNotification(' Đã bắt đầu tính giờ!', 'success');
                         } catch (error) {
-                            this.showNotification(` Lỗi: ${error.message}`, 'error');
+                            this.showNotification(` Lỗi khởi tạo phiên: ${error.message}`, 'error');
                         }
                     });
                 });
@@ -457,18 +518,20 @@
                         try {
                             const productData = this.getProductData(stadiumId);
                             const startTime = this.startTimes[stadiumId];
+                            if (!startTime) {
+                                throw new Error("Không tìm thấy thời gian bắt đầu");
+                            }
                             const endTime = new Date().getTime();
                             const elapsedTime = endTime - startTime;
 
-                            // Tính toán tiền sân dựa trên khung giờ
+                            // Tính toán tiền sân
                             const startDate = new Date(startTime);
                             const endDate = new Date(endTime);
                             const splitTime = new Date(startDate);
-                            splitTime.setHours(16, 0, 0, 0); // Thời điểm chia khung giờ (16:00)
+                            splitTime.setHours(16, 0, 0, 0);
 
                             let minutesBefore16 = 0;
                             let minutesAfter16 = 0;
-
                             if (startDate < splitTime) {
                                 if (endDate <= splitTime) {
                                     minutesBefore16 = elapsedTime / 60000;
@@ -480,10 +543,12 @@
                                 minutesAfter16 = elapsedTime / 60000;
                             }
 
-                            const stadiumCost = Math.round(
+                            let stadiumCost = Math.round(
                                 minutesBefore16 * rateBefore16PerMinute +
                                 minutesAfter16 * rateAfter16PerMinute
                             );
+                            // Đảm bảo giá tối thiểu
+                            stadiumCost = Math.max(stadiumCost, MINIMUM_STADIUM_COST);
 
                             // Tính toán phụ phí
                             const productCost = productData.waterQty * productData.waterPrice +
@@ -499,7 +564,10 @@
                                 ...productData,
                                 stadiumCost: stadiumCost,
                                 productCost: productCost,
-                                totalCost: totalCost
+                                totalCost: totalCost,
+                                startTime: startTime,
+                                endTime: endTime,
+                                elapsedTime: elapsedTime
                             };
 
                             const response = await fetch(WEB_APP_URL, {
@@ -508,8 +576,14 @@
                                 body: JSON.stringify(payload)
                             });
 
+                            if (!response.ok) {
+                                throw new Error('Không thể kết nối đến server');
+                            }
+
                             const result = await response.json();
-                            if (!response.ok) throw new Error(result.message || 'Lỗi kết thúc phiên');
+                            if (result.status !== "success") {
+                                throw new Error(result.message || 'Lỗi kết thúc phiên');
+                            }
 
                             // Lưu dữ liệu để in hóa đơn
                             this.results[stadiumId] = { 
@@ -533,14 +607,24 @@
                                 delete this.timers[stadiumId];
                             }
 
-                            // Reset giao diện
+                            // Reset giao diện, giữ lại result-box
                             this.resetStadiumUI(stadiumId);
+
+                            // Cập nhật tổng thu nhập
+                            await this.fetchTotalRevenue();
+                            this.updateRevenueDisplay(stadiumId);
+
                             this.showNotification(' Đã lưu dữ liệu!', 'success');
                         } catch (error) {
-                            this.showNotification(` Lỗi: ${error.message}`, 'error');
+                            this.showNotification(` Lỗi tính tiền: ${error.message}`, 'error');
                         }
                     });
                 });
+            }
+
+            updateRevenueDisplay(stadiumId) {
+                const revenueSpan = this.getStadiumElement(stadiumId).querySelector('.revenue-display span');
+                revenueSpan.textContent = this.formatCurrency(this.totalRevenue[stadiumId] || 0);
             }
 
             handlePrintInvoice(stadiumId) {
@@ -665,7 +749,7 @@
                 stadium.querySelector('.status-indicator').className = 'status-indicator status-available';
                 stadium.querySelector('.status-indicator').textContent = ' Trống';
                 stadium.querySelector('.time-display').textContent = ' 00:00:00';
-                // Không xóa phần result-box để giữ lại hiển thị số tiền và nút in
+                // Không xóa phần result-box để giữ lại chi tiết tính tiền và nút in hóa đơn
             }
 
             getStadiumElement(stadiumId) {
