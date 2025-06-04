@@ -3,809 +3,840 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Picaball - Quản lý sân bóng</title>
+    <title>Tuyển Sinh Lớp 6 - Trường THCS Thị trấn Đăk Hà</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --hover-color: #45a049;
-            --background-color: #f4f4f4;
-            --text-color: #333;
-            --card-bg: white;
+            --primary: #1a5fb4;
+            --primary-dark: #0d4a9d;
+            --secondary: #e6e9f0;
+            --accent: #ff7800;
+            --accent-light: #ff9c40;
+            --success: #26a269;
+            --light: #ffffff;
+            --dark: #333333;
+            --warning: #e6a443;
+            --facebook: #1877f2;
+            --important: #e74c3c;
         }
-        .confirmation-modal,
-        .password-modal {
-            position: fixed;
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            background: white;
+            color: var(--primary);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .school-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .school-info {
+            text-align: right;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.15);
+            padding: 10px 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 40px 0 30px;
+            color: var(--primary);
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .main-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+        }
+        
+        .section-title i {
+            background: var(--secondary);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .info-card {
+            background: var(--secondary);
+            border-left: 4px solid var(--primary);
+            padding: 25px 20px;
+            border-radius: 0 8px 8px 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .info-card:hover {
+            background: #dce4f5;
+            transform: translateX(5px);
+        }
+        
+        .card-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .info-card ul {
+            padding-left: 25px;
+            margin-top: 10px;
+        }
+        
+        .info-card ul li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .info-card ul li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: 8px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+        }
+        
+        .timeline-content {
+            background: var(--secondary);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .online-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--success), #1d8555);
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(38, 162, 105, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .online-btn::before {
+            content: "";
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1001;
-            animation: fadeIn 0.3s ease;
-        }
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transform: translateY(-20px);
+            background: linear-gradient(135deg, #1d8555, var(--success));
+            z-index: -1;
             opacity: 0;
-            animation: slideUp 0.3s ease forwards;
+            transition: opacity 0.3s ease;
         }
-        .password-content {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 350px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        
+        .online-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(38, 162, 105, 0.6);
         }
-        .modal-message {
-            font-size: 1.1em;
-            margin-bottom: 25px;
-            color: #555;
+        
+        .online-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .contact-card {
+            background: var(--secondary);
+            padding: 25px 20px;
+            border-radius: 8px;
             text-align: center;
+            transition: all 0.3s ease;
         }
-        .modal-buttons {
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .warning-box {
+            background: rgba(230, 164, 67, 0.15);
+            border: 2px solid var(--warning);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
             display: flex;
             gap: 15px;
-            justify-content: center;
         }
-        .modal-button {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
+        
+        .warning-icon {
+            font-size: 2rem;
+            color: var(--warning);
+            flex-shrink: 0;
         }
-        .confirm-btn {
-            background: var(--primary-color);
+        
+        .footer {
+            background: linear-gradient(135deg, var(--dark), #222222);
             color: white;
-        }
-        .confirm-btn:hover {
-            background: var(--hover-color);
-        }
-        .cancel-btn {
-            background: #f44336;
-            color: white;
-        }
-        .cancel-btn:hover {
-            background: #d32f2f;
-        }
-        .password-input {
-            width: 100%;
-            padding: 12px;
-            margin: 15px 0;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: var(--background-color);
-            color: var(--text-color);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 {
+            padding: 40px 0 25px;
             text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 40px;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-top: 50px;
         }
-        .stadiums-container {
-            display: grid;
-            gap: 25px;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
-        .stadium-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-            position: relative;
-        }
-        .stadium-card:hover {
-            transform: translateY(-3px);
-        }
-        .input-group {
-            margin-bottom: 20px;
-        }
-        .input-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #666;
-        }
-        .input-field {
-            width: 100%;
-            padding: 10px 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        .input-field:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-        .button {
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin: 5px;
-        }
-        .button-primary {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-        }
-        .button-primary:hover {
-            background-color: var(--hover-color);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-        }
-        .status-indicator {
-            padding: 12px;
-            border-radius: 6px;
-            text-align: center;
-            margin: 20px 0;
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-        .status-available {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-        }
-        .status-busy {
-            background-color: #ffebee;
-            color: #c62828;
-        }
-        .time-display {
-            font-size: 18px;
-            font-weight: 500;
-            color: #666;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            text-align: center;
-            margin: 15px 0;
-        }
-        .revenue-display {
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--text-color);
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            text-align: center;
-            margin: 15px 0;
-        }
-        .revenue-display span {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        .result-box {
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-size: 0.95em;
-        }
-        .global-notification {
-            position: fixed;
-            top: 25px;
-            right: 25px;
-            padding: 18px 30px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            animation: slideIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        
+        .footer-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
         }
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        
+        .system-link {
+            display: block;
+            background: rgba(26, 95, 180, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .success { background: #4CAF50; }
-        .error { background: #f44336; }
+        
+        .system-link:hover {
+            background: rgba(26, 95, 180, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .system-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            z-index: 1;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .system-link:hover::before {
+            transform: translateX(0);
+        }
+        
+        .system-link strong {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .system-link i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .zalo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 10px;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: rgba(0, 123, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .zalo-link:hover {
+            background: rgba(0, 123, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .facebook-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--facebook);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 10px;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: rgba(24, 119, 242, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .facebook-link:hover {
+            background: rgba(24, 119, 242, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .important-note {
+            background: rgba(255, 120, 0, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+        }
+        
+        .important-note h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .note-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed rgba(255, 120, 0, 0.3);
+        }
+        
+        .note-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .note-icon {
+            color: var(--accent);
+            font-size: 1.2rem;
+            min-width: 24px;
+        }
+        
+        /* New styles for timeline highlights */
+        .highlight-box {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid var(--important);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .highlight-icon {
+            font-size: 1.8rem;
+            color: var(--important);
+            flex-shrink: 0;
+        }
+        
+        .highlight-content strong {
+            color: var(--important);
+            font-weight: 700;
+        }
+        
+        .timeline-date.highlight {
+            color: var(--important);
+            font-size: 1.2rem;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .timeline-content p.highlight {
+            font-weight: 600;
+            color: var(--dark);
+            padding-left: 10px;
+            border-left: 3px solid var(--important);
+        }
+        
+        .info-card .timeline-highlight {
+            background: rgba(231, 76, 60, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .info-card .timeline-highlight .date {
+            font-weight: 700;
+            color: var(--important);
+            margin-bottom: 5px;
+        }
+        
+        .info-card .timeline-highlight .activity {
+            font-weight: 600;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(38, 162, 105, 0.6);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(38, 162, 105, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(38, 162, 105, 0);
+            }
+        }
+        
         @media (max-width: 768px) {
-            .stadiums-container {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .logo {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .school-info {
+                text-align: center;
+                width: 100%;
+            }
+            
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .online-btn {
+                font-size: 1.2rem;
+                padding: 16px 35px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 25px 20px;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
-            .container {
-                padding: 0 15px;
-            }
-            h1 {
-                font-size: 2em;
+            
+            .info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Modal xác nhận -->
-    <div class="confirmation-modal" id="confirmationModal">
-        <div class="modal-content">
-            <div class="modal-message" id="modalMessage"></div>
-            <div class="modal-buttons">
-                <button class="modal-button confirm-btn" id="confirmAction">Xác nhận</button>
-                <button class="modal-button cancel-btn" id="cancelAction">Hủy</button>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <div class="school-name">TRƯỜNG THCS THỊ TRẤN ĐĂK HÀ</div>
+                        <div>HUYỆN ĐĂK HÀ - TỈNH KON TUM</div>
+                    </div>
+                </div>
+                <div class="school-info">
+                    <div><i class="fas fa-calendar-alt"></i> Năm học: 2025 - 2026</div>
+                    <div><i class="fas fa-book"></i> Tuyển sinh lớp 6</div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Modal mật khẩu -->
-    <div class="password-modal" id="passwordModal">
-        <div class="password-content">
-            <h3 style="margin:0 0 15px;color:#333;">XÁC THỰC QUẢN TRỊ</h3>
-            <input type="password" class="password-input" id="passwordInput" placeholder="Nhập mật khẩu" autocomplete="current-password">
-            <div class="modal-buttons">
-                <button class="modal-button confirm-btn" id="submitPassword">Xác nhận</button>
-                <button class="modal-button cancel-btn" id="cancelPassword">Hủy</button>
-            </div>
-        </div>
-    </div>
-    <!-- Nội dung chính -->
-    <div class="container">
-        <h1> PICABALL - HỆ THỐNG TÍNH TIỀN</h1>
-        <div class="stadiums-container" id="stadiumsContainer"></div>
-    </div>
-    <!-- Thêm thư viện jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyVin8_x1VYjmQgjIi14slcLgOwWVVDuEM_gJohWjWjYX7vuFD4hsU8Gh5ozQmoOmGT4A/exec";
-        const VALID_PASSWORDS = ["tan123", "hue123", "ha123"];
-        const STADIUMS = [
-            { id: 1, name: "Sân 1", defaultRate: 80000 },
-            { id: 2, name: "Sân 2", defaultRate: 80000 },
-            { id: 3, name: "Sân 3", defaultRate: 80000 }
-        ];
+    </header>
 
-        // Giá theo khung giờ
-        const rateBefore16PerMinute = 60000 / 60; // 1000 VND/phút
-        const rateAfter16PerMinute = 80000 / 60; // ~1333.333 VND/phút
-        const MINIMUM_STADIUM_COST = 1000; // Giá tối thiểu để tránh stadiumCost = 0
-
-        class StadiumManager {
-            constructor(stadiums) {
-                this.stadiums = stadiums;
-                this.timers = {};
-                this.startTimes = {};
-                this.results = {};
-                this.totalRevenue = {};
-                this.pendingAction = null;
-                this.init();
-            }
-
-            async init() {
-                await this.fetchTotalRevenue();
-                this.renderStadiums();
-                this.setupEventListeners();
-                this.setupModalHandlers();
-                this.setupPasswordHandlers();
-                await this.initializeTimers();
-            }
-
-            async fetchTotalRevenue() {
-                try {
-                    const response = await fetch(`${WEB_APP_URL}?action=getTotalRevenue`);
-                    if (!response.ok) {
-                        throw new Error("Không thể kết nối đến server");
-                    }
-                    const revenues = await response.json();
-                    if (!Array.isArray(revenues)) {
-                        throw new Error("Dữ liệu tổng thu nhập không hợp lệ");
-                    }
-                    revenues.forEach(({ stadiumId, value }) => {
-                        if (stadiumId && value !== undefined) {
-                            this.totalRevenue[stadiumId] = value;
-                        }
-                    });
-                    // Đảm bảo tất cả sân có giá trị mặc định
-                    this.stadiums.forEach(stadium => {
-                        if (this.totalRevenue[stadium.id] === undefined) {
-                            this.totalRevenue[stadium.id] = 0;
-                        }
-                    });
-                } catch (error) {
-                    this.showNotification(` Không tải được tổng thu nhập: ${error.message}`, 'error');
-                    this.stadiums.forEach(stadium => {
-                        this.totalRevenue[stadium.id] = 0;
-                    });
-                }
-            }
-
-            renderStadiums() {
-                const container = document.getElementById('stadiumsContainer');
-                container.innerHTML = this.stadiums.map(stadium => `
-                    <div class="stadium-card" data-stadium-id="${stadium.id}">
-                        <h2>${stadium.name}</h2>
-                        <div class="time-display" id="timer${stadium.id}"> 00:00:00</div>
-                        <div class="revenue-display">Tổng tiền: <span>${this.formatCurrency(this.totalRevenue[stadium.id] || 0)}</span></div>
-                        <div class="input-group">
-                            <label class="input-label"> Giá/giờ (VND):</label>
-                            <input type="number" class="input-field rate-input" value="${this.getCurrentRate()}" min="0" step="1000" readonly>
-                        </div>
-                        ${this.renderProductInput(' Nước suối', 'water', 5000)}
-                        ${this.renderProductInput(' Bù khoáng', 'mineral', 10000)}
-                        ${this.renderProductInput(' Bóng', 'ball', 50000)}
-                        <div class="button-group">
-                            <button class="button button-primary start-btn"> Bắt đầu</button>
-                            <button class="button button-primary calculate-btn" style="display:none;"> Tính tiền</button>
-                        </div>
-                        <div class="status-indicator status-available" id="status${stadium.id}"> Trống</div>
-                        <div class="result-box" id="result${stadium.id}"></div>
-                    </div>
-                `).join('');
-            }
-
-            getCurrentRate() {
-                const now = new Date();
-                const currentHour = now.getHours();
-                return currentHour < 16 ? 60000 : 80000;
-            }
-
-            renderProductInput(label, prefix, price) {
-                return `
-                    <div class="input-group">
-                        <label class="input-label">${label}:</label>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                            <input type="number" class="input-field ${prefix}-quantity" placeholder="Số lượng" min="0">
-                            <input type="number" class="input-field ${prefix}-price" value="${price}" min="0" step="1000">
-                        </div>
-                    </div>
-                `;
-            }
-
-            setupEventListeners() {
-                document.getElementById('stadiumsContainer').addEventListener('click', (e) => {
-                    const stadiumCard = e.target.closest('.stadium-card');
-                    if (!stadiumCard) return;
-                    const stadiumId = parseInt(stadiumCard.dataset.stadiumId);
+    <main class="container">
+        <h1 class="main-title">THÔNG BÁO TUYỂN SINH LỚP 6 NĂM HỌC 2025 - 2026</h1>
+        
+       
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-users"></i> Đối tượng & Chỉ tiêu</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-star"></i> Lớp Chất lượng cao</h3>
+                    <p><strong>Chỉ tiêu:</strong> 126 học sinh</p>
+                    <p><strong>Điều kiện:</strong></p>
+                    <ul>
+                        <li>Học sinh hoàn thành chương trình tiểu học</li>
+                        <li>Thường trú/tạm trú tại huyện Đăk Hà</li>
+                    </ul>
                     
-                    if (e.target.classList.contains('start-btn')) this.handleStartSession(stadiumId);
-                    if (e.target.classList.contains('calculate-btn')) this.handleCalculate(stadiumId);
-                    if (e.target.classList.contains('print-btn')) this.handlePrintInvoice(stadiumId);
-                });
-
-                document.querySelectorAll('.input-field').forEach(input => {
-                    input.addEventListener('input', () => this.validateInput(input));
-                });
-            }
-
-            validateInput(input) {
-                if (parseInt(input.value) < 0) input.value = 0;
-            }
-
-            setupModalHandlers() {
-                const modal = document.getElementById('confirmationModal');
-                document.getElementById('confirmAction').addEventListener('click', () => {
-                    modal.style.display = 'none';
-                    this.pendingAction?.action();
-                });
-
-                document.getElementById('cancelAction').addEventListener('click', () => {
-                    modal.style.display = 'none';
-                    this.pendingAction = null;
-                });
-            }
-
-            setupPasswordHandlers() {
-                const passwordModal = document.getElementById('passwordModal');
-                document.getElementById('submitPassword').addEventListener('click', () => {
-                    const input = document.getElementById('passwordInput').value;
-                    if (VALID_PASSWORDS.includes(input)) {
-                        passwordModal.style.display = 'none';
-                        this.pendingAction?.();
-                    } else {
-                        this.showNotification(' Mật khẩu không đúng!', 'error');
-                        passwordModal.style.display = 'none';
-                    }
-                });
-
-                document.getElementById('cancelPassword').addEventListener('click', () => {
-                    passwordModal.style.display = 'none';
-                });
-
-                document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') document.getElementById('submitPassword').click();
-                });
-            }
-
-            showConfirmation(message, action) {
-                document.getElementById('modalMessage').textContent = message;
-                document.getElementById('confirmationModal').style.display = 'flex';
-                this.pendingAction = { action };
-            }
-
-            showPasswordModal(action) {
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordModal').style.display = 'flex';
-                this.pendingAction = action;
-            }
-
-            async initializeTimers() {
-                try {
-                    const response = await fetch(`${WEB_APP_URL}?action=getAllStatus`);
-                    if (!response.ok) {
-                        throw new Error("Không thể tải trạng thái sân");
-                    }
-                    const statuses = await response.json();
-                    statuses.forEach(status => {
-                        if (status.status === 'BUSY' && status.startTime) {
-                            this.startTimes[status.stadiumId] = new Date(status.startTime).getTime();
-                            this.startTimer(status.stadiumId);
-                        }
-                        this.updateUI(status.stadiumId, status.status.toLowerCase());
-                    });
-                } catch (error) {
-                    this.showNotification(` Lỗi tải trạng thái sân: ${error.message}`, 'error');
-                }
-            }
-
-            async handleStartSession(stadiumId) {
-                this.showConfirmation('BẮT ĐẦU tính giờ cho sân này?', () => {
-                    this.showPasswordModal(async () => {
-                        try {
-                            // Xóa dữ liệu result-box trước khi bắt đầu phiên mới
-                            const resultDiv = this.getStadiumElement(stadiumId).querySelector('.result-box');
-                            resultDiv.innerHTML = '';
-
-                            const payload = {
-                                action: "startSession",
-                                stadiumId: stadiumId,
-                                rate: this.getCurrentRate()
-                            };
-
-                            const response = await fetch(WEB_APP_URL, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                                body: JSON.stringify(payload)
-                            });
-
-                            if (!response.ok) {
-                                throw new Error('Không thể kết nối đến server');
-                            }
-
-                            const result = await response.json();
-                            if (result.status !== "success") {
-                                throw new Error(result.message || 'Lỗi khởi tạo phiên');
-                            }
-
-                            const now = new Date().getTime();
-                            this.startTimes[stadiumId] = now;
-                            this.startTimer(stadiumId);
-                            this.updateUI(stadiumId, 'busy');
-                            this.showNotification(' Đã bắt đầu tính giờ!', 'success');
-                        } catch (error) {
-                            this.showNotification(` Lỗi khởi tạo phiên: ${error.message}`, 'error');
-                        }
-                    });
-                });
-            }
-
-            async handleCalculate(stadiumId) {
-                this.showConfirmation('TÍNH TIỀN và kết thúc phiên?', () => {
-                    this.showPasswordModal(async () => {
-                        try {
-                            const productData = this.getProductData(stadiumId);
-                            const startTime = this.startTimes[stadiumId];
-                            if (!startTime) {
-                                throw new Error("Không tìm thấy thời gian bắt đầu");
-                            }
-                            const endTime = new Date().getTime();
-                            const elapsedTime = endTime - startTime;
-
-                            // Tính toán tiền sân
-                            const startDate = new Date(startTime);
-                            const endDate = new Date(endTime);
-                            const splitTime = new Date(startDate);
-                            splitTime.setHours(16, 0, 0, 0);
-
-                            let minutesBefore16 = 0;
-                            let minutesAfter16 = 0;
-                            if (startDate < splitTime) {
-                                if (endDate <= splitTime) {
-                                    minutesBefore16 = elapsedTime / 60000;
-                                } else {
-                                    minutesBefore16 = (splitTime - startDate) / 60000;
-                                    minutesAfter16 = (endDate - splitTime) / 60000;
-                                }
-                            } else {
-                                minutesAfter16 = elapsedTime / 60000;
-                            }
-
-                            let stadiumCost = Math.round(
-                                minutesBefore16 * rateBefore16PerMinute +
-                                minutesAfter16 * rateAfter16PerMinute
-                            );
-                            // Đảm bảo giá tối thiểu
-                            stadiumCost = Math.max(stadiumCost, MINIMUM_STADIUM_COST);
-
-                            // Tính toán phụ phí
-                            const productCost = productData.waterQty * productData.waterPrice +
-                                               productData.mineralQty * productData.mineralPrice +
-                                               productData.ballQty * productData.ballPrice;
-
-                            // Tính tổng cộng
-                            const totalCost = stadiumCost + productCost;
-
-                            const payload = {
-                                action: "endSession",
-                                stadiumId: stadiumId,
-                                ...productData,
-                                stadiumCost: stadiumCost,
-                                productCost: productCost,
-                                totalCost: totalCost,
-                                startTime: startTime,
-                                endTime: endTime,
-                                elapsedTime: elapsedTime
-                            };
-
-                            const response = await fetch(WEB_APP_URL, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                                body: JSON.stringify(payload)
-                            });
-
-                            if (!response.ok) {
-                                throw new Error('Không thể kết nối đến server');
-                            }
-
-                            const result = await response.json();
-                            if (result.status !== "success") {
-                                throw new Error(result.message || 'Lỗi kết thúc phiên');
-                            }
-
-                            // Lưu dữ liệu để in hóa đơn
-                            this.results[stadiumId] = { 
-                                ...result, 
-                                productData, 
-                                startTime, 
-                                endTime, 
-                                elapsedTime, 
-                                stadiumCost,
-                                productCost,
-                                totalCost
-                            };
-
-                            // Hiển thị kết quả
-                            this.displayResult(stadiumId, this.results[stadiumId]);
-
-                            // Dừng bộ đếm thời gian
-                            if (this.timers[stadiumId]) {
-                                clearInterval(this.timers[stadiumId].display);
-                                clearInterval(this.timers[stadiumId].sync);
-                                delete this.timers[stadiumId];
-                            }
-
-                            // Reset giao diện, giữ lại result-box
-                            this.resetStadiumUI(stadiumId);
-
-                            // Cập nhật tổng thu nhập
-                            await this.fetchTotalRevenue();
-                            this.updateRevenueDisplay(stadiumId);
-
-                            this.showNotification(' Đã lưu dữ liệu!', 'success');
-                        } catch (error) {
-                            this.showNotification(` Lỗi tính tiền: ${error.message}`, 'error');
-                        }
-                    });
-                });
-            }
-
-            updateRevenueDisplay(stadiumId) {
-                const revenueSpan = this.getStadiumElement(stadiumId).querySelector('.revenue-display span');
-                revenueSpan.textContent = this.formatCurrency(this.totalRevenue[stadiumId] || 0);
-            }
-
-            handlePrintInvoice(stadiumId) {
-                try {
-                    const data = this.results[stadiumId];
-                    if (!data) {
-                        this.showNotification(' Không có dữ liệu để in!', 'error');
-                        return;
-                    }
-
-                    const { jsPDF } = window.jspdf;
-                    if (!jsPDF) {
-                        this.showNotification(' Lỗi: Thư viện PDF chưa tải!', 'error');
-                        return;
-                    }
-
-                    const doc = new jsPDF();
-
-                    const stadiumName = this.stadiums.find(s => s.id === stadiumId).name;
-                    const startTimeStr = new Date(data.startTime).toLocaleString('vi-VN');
-                    const endTimeStr = new Date(data.endTime).toLocaleString('vi-VN');
-
-                    doc.setFontSize(18);
-                    doc.text('HOA DON SAN BONG', 10, 10);
-                    doc.setFontSize(12);
-                    doc.text(`- San: ${stadiumName}`, 10, 20);
-                    doc.text(`- Thoi gian bat dau: ${startTimeStr}`, 10, 30);
-                    doc.text(`- Thoi gian ket thuc: ${endTimeStr}`, 10, 40);
-                    doc.text(`- Thoi gian su dung: ${this.formatTime(data.elapsedTime)}`, 10, 50);
-                    doc.text(`- Tien san: ${this.formatCurrency(data.stadiumCost)}`, 10, 60);
-
-                    let y = 70;
-                    if (data.productData) {
-                        doc.text('Chi tiet:', 10, y);
-                        y += 10;
-                        if (data.productData.waterQty > 0) {
-                            doc.text(`- Nuoc suoi: ${data.productData.waterQty} x ${this.formatCurrency(data.productData.waterPrice)}`, 10, y);
-                            y += 10;
-                        }
-                        if (data.productData.mineralQty > 0) {
-                            doc.text(`- Bu khoang: ${data.productData.mineralQty} x ${this.formatCurrency(data.productData.mineralPrice)}`, 10, y);
-                            y += 10;
-                        }
-                        if (data.productData.ballQty > 0) {
-                            doc.text(`- Bong: ${data.productData.ballQty} x ${this.formatCurrency(data.productData.ballPrice)}`, 10, y);
-                            y += 10;
-                        }
-                    }
-
-                    doc.text(`- Phu phi: ${this.formatCurrency(data.productCost)}`, 10, y);
-                    y += 10;
-                    doc.text(`- Tong cong: ${this.formatCurrency(data.totalCost)}`, 10, y);
-
-                    doc.save(`hoadon_san${stadiumId}.pdf`);
-                } catch (error) {
-                    this.showNotification(` Lỗi khi tạo PDF: ${error.message}`, 'error');
-                }
-            }
-
-            getProductData(stadiumId) {
-                const getValue = (selector) => {
-                    const value = this.getStadiumElement(stadiumId).querySelector(selector).value;
-                    return value ? parseInt(value) : 0;
-                };
-                return {
-                    waterQty: Math.abs(getValue('.water-quantity')) || 0,
-                    waterPrice: Math.abs(getValue('.water-price')) || 5000,
-                    mineralQty: Math.abs(getValue('.mineral-quantity')) || 0,
-                    mineralPrice: Math.abs(getValue('.mineral-price')) || 10000,
-                    ballQty: Math.abs(getValue('.ball-quantity')) || 0,
-                    ballPrice: Math.abs(getValue('.ball-price')) || 50000
-                };
-            }
-
-            startTimer(stadiumId) {
-                const timerElement = this.getStadiumElement(stadiumId).querySelector('.time-display');
-
-                const updateTimer = () => {
-                    const now = new Date().getTime();
-                    const startTime = this.startTimes[stadiumId];
-                    if (!startTime) {
-                        timerElement.textContent = ' Lỗi thời gian';
-                        return;
-                    }
-                    const elapsedTime = now - startTime;
-                    timerElement.textContent = ` ${this.formatTime(elapsedTime)}`;
-                };
-
-                const syncWithServer = async () => {
-                    try {
-                        const response = await fetch(`${WEB_APP_URL}?action=getAllStatus`);
-                        const statuses = await response.json();
-                        const status = statuses.find(s => s.stadiumId === stadiumId);
-                        if (status && status.status === 'BUSY' && status.startTime) {
-                            const serverStartTime = new Date(status.startTime).getTime();
-                            if (serverStartTime !== this.startTimes[stadiumId]) {
-                                this.startTimes[stadiumId] = serverStartTime;
-                            }
-                        }
-                    } catch (error) {
-                        console.error(`Lỗi đồng bộ thời gian: ${error}`);
-                    }
-                };
-
-                if (this.timers[stadiumId]) {
-                    clearInterval(this.timers[stadiumId].display);
-                    clearInterval(this.timers[stadiumId].sync);
-                }
-
-                this.timers[stadiumId] = {
-                    display: setInterval(updateTimer, 1000),
-                    sync: setInterval(syncWithServer, 3000)
-                };
-                updateTimer();
-                syncWithServer();
-            }
-
-            resetStadiumUI(stadiumId) {
-                const stadium = this.getStadiumElement(stadiumId);
-                stadium.querySelector('.start-btn').style.display = 'block';
-                stadium.querySelector('.calculate-btn').style.display = 'none';
-                stadium.querySelector('.status-indicator').className = 'status-indicator status-available';
-                stadium.querySelector('.status-indicator').textContent = ' Trống';
-                stadium.querySelector('.time-display').textContent = ' 00:00:00';
-                // Không xóa phần result-box để giữ lại chi tiết tính tiền và nút in hóa đơn
-            }
-
-            getStadiumElement(stadiumId) {
-                return document.querySelector(`[data-stadium-id="${stadiumId}"]`);
-            }
-
-            getInputValue(stadiumId, selector) {
-                const value = this.getStadiumElement(stadiumId).querySelector(selector).value;
-                return value ? parseInt(value) : 0;
-            }
-
-            formatTime(ms) {
-                if (!ms) return '00:00:00';
-                const pad = n => n.toString().padStart(2, '0');
-                const h = Math.floor(ms / 3600000);
-                const m = Math.floor((ms % 3600000) / 60000);
-                const s = Math.floor((ms % 60000) / 1000);
-                return `${pad(h)}:${pad(m)}:${pad(s)}`;
-            }
-
-            formatCurrency(amount) {
-                if (!amount) return '0 ₫';
-                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
-            }
-
-            displayResult(stadiumId, data) {
-                const resultDiv = this.getStadiumElement(stadiumId).querySelector('.result-box');
-                resultDiv.innerHTML = `
-                    <div> Thời gian: ${this.formatTime(data.elapsedTime)}</div>
-                    <div> Tiền sân: ${this.formatCurrency(data.stadiumCost)}</div>
-                    <div> Phụ phí: ${this.formatCurrency(data.productCost)}</div>
-                    <div style="margin-top:15px;font-weight:bold;color:var(--primary-color);">
-                         Tổng cộng: ${this.formatCurrency(data.totalCost)}
+                    <div class="highlight-box">
+                        <div class="highlight-icon"><i class="fas fa-calendar-check"></i></div>
+                        <div class="highlight-content">
+                            <p><strong>Thời gian nhận hồ sơ:</strong> Từ ngày 06/6/2025 đến ngày 11/6/2025</p>
+                            <p><strong>Tổ chức xét tuyển:</strong> Từ ngày 12/6/2025 đến ngày 13/6/2025</p>
+                            <p><strong>Công bố kết quả:</strong> Trước ngày 15/6/2025</p>
+                        </div>
                     </div>
-                    <button class="button button-primary print-btn"> In hóa đơn</button>
-                `;
-            }
-
-            showNotification(message, type) {
-                const notification = document.createElement('div');
-                notification.className = `global-notification ${type}`;
-                notification.textContent = message;
-                document.body.appendChild(notification);
-                setTimeout(() => notification.remove(), 3000);
-            }
-
-            updateUI(stadiumId, status) {
-                const stadium = this.getStadiumElement(stadiumId);
-                stadium.querySelector('.start-btn').style.display = status === 'busy' ? 'none' : 'block';
-                stadium.querySelector('.calculate-btn').style.display = status === 'busy' ? 'block' : 'none';
-                stadium.querySelector('.status-indicator').className = `status-indicator status-${status}`;
-                stadium.querySelector('.status-indicator').textContent = status === 'busy' ? ' Đang sử dụng' : ' Trống';
-            }
-        }
-
-        new StadiumManager(STADIUMS);
-    </script>
+                    
+                    <p><strong>Phương thức xét tuyển:</strong> Theo hướng dẫn tại Công văn số 620/SGDĐT-GDMNTH ngày 28/02/2025 của Sở Giáo dục và Đào tạo tỉnh Kon Tum về việc hướng dẫn xét tuyển học sinh vào học lớp 6 (áp dụng khi số lượng đăng ký vượt chỉ tiêu)</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-book-open"></i> Lớp Đại trà</h3>
+                    <p><strong>Đối tượng:</strong> Học sinh hoàn thành chương trình tiểu học</p>
+                    <p><strong>Địa bàn tuyển sinh:</strong></p>
+                    <ul>
+                        <li>Học sinh cư trú tại thị trấn Đăk Hà</li>
+                        <li>Học sinh tại thôn 7 (xã Ngọc Wang)</li>
+                        <li>Học sinh tại thôn 1, 5 (xã Hà Mòn)</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-icon"><i class="fas fa-clock"></i></div>
+                        <div class="highlight-content">
+                            <p><strong>Thời gian nhận hồ sơ:</strong> Từ ngày 06/6/2025 đến ngày 15/6/2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-laptop"></i> Nộp hồ sơ trực tuyến</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-globe"></i> Hệ thống nộp hồ sơ</h3>
+                    <p>Quý phụ huynh vui lòng nộp hồ sơ tuyển sinh trực tuyến tại địa chỉ:</p>
+                    <a href="https://kontum.tsdc.vnedu.vn/" class="system-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> <strong>https://kontum.tsdc.vnedu.vn/</strong>
+                    </a>
+                    <p>Hệ thống mở từ 00:00 ngày 06/6/2025 đến 24:00 ngày 15/6/2025.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-file-import"></i> Quy trình nộp hồ sơ</h3>
+                    <ul>
+                        <li>Truy cập hệ thống trực tuyến theo địa chỉ trên</li>
+                        <li>Đăng nhập bằng tài khoản, mật khẩu do trường Tiểu học cấp</li>
+                        <li>Điền đầy đủ thông tin theo yêu cầu</li>
+                        <li>Tải lên các giấy tờ cần thiết (nếu có)</li>
+                        <li>Kiểm tra kỹ thông tin trước khi gửi HỒ SƠ</li>
+                    </ul>
+                    
+                    <div class="important-note">
+                        <h3><i class="fas fa-exclamation-circle"></i> Lưu ý quan trọng</h3>
+                        
+                        <div class="note-item">
+                            <div class="note-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Cha, mẹ học sinh vui lòng kiểm tra kỹ và cam kết ghi đúng các thông tin trong phần mềm tuyển sinh trực tuyến trước khi nộp hồ sơ, nếu nhà trường kiểm tra phát hiện thông tin không chính xác kết quả tuyển sinh sẽ bị hủy bỏ.</div>
+                        </div>
+                        
+                        <div class="note-item">
+                            <div class="note-icon"><i class="fas fa-exchange-alt"></i></div>
+                            <div>Đối với những học sinh có địa bàn tuyển sinh theo quy định, nếu không trúng tuyển vào lớp chất lượng cao thì hồ sơ được chuyển xuống học các lớp đại trà.</div>
+                        </div>
+                        
+                       
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <h3><i class="fas fa-headset"></i> Hỗ trợ trực tuyến</h3>
+                        <p>Nếu cần hỗ trợ trong quá trình nộp hồ sơ, vui lòng tham gia nhóm Zalo:</p>
+                        <a href="https://zalo.me/g/thwspv318" class="zalo-link" target="_blank">
+                            <i class="fab fa-zalando"></i> https://zalo.me/g/thwspv318
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-check"></i> Lịch trình tuyển sinh</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-1"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date highlight">06/6/2025 - 11/6/2025</div>
+                        <p class="highlight">Nhận hồ sơ lớp Chất lượng cao</p>
+                        <p>Hệ thống trực tuyến mở để nhận đăng ký cho lớp chất lượng cao</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-2"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date highlight">12/6/2025 - 13/6/2025</div>
+                        <p class="highlight">Tổ chức xét tuyển lớp Chất lượng cao</p>
+                        <p>Xét tuyển theo công văn 620 của Sở GD&ĐT tỉnh Kon Tum</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-3"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date highlight">Trước 15/6/2025</div>
+                        <p class="highlight">Công bố kết quả xét tuyển lớp Chất lượng cao</p>
+                        <p>Kết quả sẽ được công bố trên website và fanpage của trường</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-4"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date highlight">06/6/2025 - 15/6/2025</div>
+                        <p class="highlight">Nhận hồ sơ lớp Đại trà</p>
+                        <p>Hệ thống trực tuyến tiếp tục mở để nhận đăng ký cho lớp đại trà</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-5"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Trước 30/7/2025</div>
+                        <p>Hoàn thiện hồ sơ nộp về Phòng GD&ĐT Đăk Hà</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btn-container">
+            <a href="https://kontum.tsdc.vnedu.vn/" class="online-btn" target="_blank">
+                <i class="fas fa-laptop"></i> NỘP HỒ SƠ TRỰC TUYẾN NGAY
+            </a>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Thông tin liên hệ</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Website</h3>
+                    <p>www.thcsttdakha.edu.vn</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fab fa-facebook"></i></div>
+                    <h3>Fanpage Facebook</h3>
+                    <p>Cập nhật thông tin mới nhất</p>
+                    <a href="https://www.facebook.com/thcsthitrandakha/" class="facebook-link" target="_blank">
+                        <i class="fab fa-facebook"></i> Truy cập Fanpage
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fab fa-zalando"></i></div>
+                    <h3>Hỗ trợ Zalo</h3>
+                    <p>Nhóm hỗ trợ tuyển sinh</p>
+                    <a href="https://zalo.me/g/thwspv318" class="zalo-link" target="_blank">
+                        <i class="fab fa-zalando"></i> Truy cập nhóm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-school"></i>
+                    <span>TRƯỜNG THCS THỊ TRẤN ĐĂK HÀ</span>
+                </div>
+                <p>© 2025 Tuyển sinh lớp 6 năm học 2025-2026</p>
+                <p>Mọi thông tin chi tiết vui lòng liên hệ Tổ tuyển sinh nhà trường từ ngày 06/6/2025</p>
+                <p>Hệ thống nộp hồ sơ trực tuyến: <a href="https://kontum.tsdc.vnedu.vn/" style="color: #4fc3f7; text-decoration: none;">https://kontum.tsdc.vnedu.vn/</a></p>
+                <p>Fanpage Facebook: <a href="https://www.facebook.com/thcsthitrandakha/" style="color: #4fc3f7; text-decoration: none;">https://www.facebook.com/thcsthitrandakha/</a></p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
