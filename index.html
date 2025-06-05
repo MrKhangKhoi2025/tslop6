@@ -562,6 +562,21 @@
             font-weight: 600;
         }
         
+        /* New styles for website link */
+        .website-link {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .website-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
         @keyframes pulse {
             0% {
                 box-shadow: 0 0 0 0 rgba(38, 162, 105, 0.6);
@@ -617,6 +632,48 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .highlight-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .timeline::before {
+                left: 12px;
+            }
+            
+            .timeline-item {
+                padding-left: 40px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card-title {
+                font-size: 1.2rem;
+            }
+            
+            .online-btn {
+                font-size: 1.1rem;
+                padding: 14px 25px;
+            }
+            
+            .logo-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            
+            .school-name {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -643,8 +700,6 @@
 
     <main class="container">
         <h1 class="main-title">THÔNG BÁO TUYỂN SINH LỚP 6 NĂM HỌC 2025 - 2026</h1>
-        
-       
         
         <div class="section">
             <h2 class="section-title"><i class="fas fa-users"></i> Đối tượng & Chỉ tiêu</h2>
@@ -696,10 +751,10 @@
                 <div class="info-card">
                     <h3 class="card-title"><i class="fas fa-globe"></i> Hệ thống nộp hồ sơ</h3>
                     <p>Quý phụ huynh vui lòng nộp hồ sơ tuyển sinh trực tuyến tại địa chỉ:</p>
-                    <a href="https://kontum.tsdc.vnedu.vn/" class="system-link" target="_blank">
+                    <a href="https://kontum.tsdc.vnedu.vn" class="system-link" target="_blank">
                         <i class="fas fa-external-link-alt"></i> <strong>https://kontum.tsdc.vnedu.vn/</strong>
                     </a>
-             
+                    
                 </div>
                 
                 <div class="info-card">
@@ -724,8 +779,6 @@
                             <div class="note-icon"><i class="fas fa-exchange-alt"></i></div>
                             <div>Đối với những học sinh có địa bàn tuyển sinh theo quy định, nếu không trúng tuyển vào lớp chất lượng cao thì hồ sơ được chuyển xuống học các lớp đại trà.</div>
                         </div>
-                        
-                       
                     </div>
                     
                     <div style="text-align: center; margin-top: 30px;">
@@ -799,8 +852,10 @@
             <div class="contact-grid">
                 <div class="contact-card">
                     <div class="contact-icon"><i class="fas fa-globe"></i></div>
-                    <h3>Website</h3>
-                    <p>www.thcsttdakha.edu.vn</p>
+                    <h3>Website chính thức</h3>
+                    <a href="http://thcsdakha.pgddtdakha.edu.vn" class="website-link" target="_blank">
+                        thcsdakha.pgddtdakha.edu.vn
+                    </a>
                 </div>
                 
                 <div class="contact-card">
@@ -833,8 +888,9 @@
                 </div>
                 <p>© 2025 Tuyển sinh lớp 6 năm học 2025-2026</p>
                 <p>Mọi thông tin chi tiết vui lòng liên hệ Tổ tuyển sinh nhà trường từ ngày 06/6/2025</p>
-                <p>Hệ thống nộp hồ sơ trực tuyến: <a href="https://kontum.tsdc.vnedu.vn/" style="color: #4fc3f7; text-decoration: none;">https://kontum.tsdc.vnedu.vn/</a></p>
-                <p>Fanpage Facebook: <a href="https://www.facebook.com/thcsthitrandakha/" style="color: #4fc3f7; text-decoration: none;">https://www.facebook.com/thcsthitrandakha/</a></p>
+                <p><i class="fas fa-globe"></i> Website: <a href="http://thcsdakha.pgddtdakha.edu.vn" target="_blank" style="color: #4fc3f7; text-decoration: none;">thcsdakha.pgddtdakha.edu.vn</a></p>
+                <p><i class="fas fa-external-link-alt"></i> Hệ thống nộp hồ sơ: <a href="https://kontum.tsdc.vnedu.vn/" target="_blank" style="color: #4fc3f7; text-decoration: none;">https://kontum.tsdc.vnedu.vn/</a></p>
+                <p><i class="fab fa-facebook"></i> Fanpage: <a href="https://www.facebook.com/thcsthitrandakha/" target="_blank" style="color: #4fc3f7; text-decoration: none;">https://www.facebook.com/thcsthitrandakha/</a></p>
             </div>
         </div>
     </footer>
