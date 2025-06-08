@@ -576,17 +576,236 @@
             color: var(--primary-dark);
             text-decoration: underline;
         }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(38, 162, 105, 0.6);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(38, 162, 105, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(38, 162, 105, 0);
-            }
+
+        /* Tra cứu kết quả */
+        .result-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        .result-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input {
+            padding: 14px;
+            font-size: 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .input-highlight {
+            border: 2px solid var(--primary);
+            animation: pulse-border 1.5s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+
+        .error-message {
+            display: none;
+            color: var(--important);
+            font-size: 14px;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(239, 68, 68, 0.05);
+            border-radius: 6px;
+            margin-top: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 14px 24px;
+            font-size: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 10px rgba(37, 99, 235, 0.15);
+            flex: 1;
+            min-width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.2);
+        }
+
+        #sendProfileBtn {
+            background: linear-gradient(135deg, var(--success) 0%, #1d8555 100%);
+            box-shadow: 0 5px 10px rgba(34, 197, 94, 0.15);
+        }
+
+        #sendProfileBtn:hover {
+            box-shadow: 0 8px 15px rgba(34, 197, 94, 0.2);
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(203, 213, 225, 0.3);
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            text-align: left;
+            animation: fadeIn 0.4s ease;
+        }
+
+        #result p {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #f1f5f9;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        #result p:last-child {
+            border-bottom: none;
+        }
+
+        #result strong {
+            color: var(--text-dark);
+            min-width: 180px;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .status-received {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #22c55e;
+        }
+
+        .status-processing {
+            background: #fff4de;
+            color: #854d0e;
+            border: 1px solid #f59e0b;
+            animation: pulse-processing 2s infinite;
+        }
+
+        .status-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+
+        .status-not-sent {
+            background: #e0e7ff;
+            color: #4f46e5;
+            border: 1px solid #818cf8;
+        }
+
+        .status-default {
+            background: #e0f2fe;
+            color: #075985;
+            border: 1px solid #0ea5e9;
+        }
+
+        @keyframes pulse-processing {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading-dots {
+            color: var(--text-light);
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .loading-dots::after {
+            content: '.';
+            animation: dots 1s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80%, 100% { content: ''; }
+        }
+
+        @keyframes pulse-send {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .pulse-effect {
+            animation: pulse-send 1.5s infinite;
         }
         
         @media (max-width: 768px) {
@@ -644,6 +863,25 @@
             
             .timeline-item {
                 padding-left: 40px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .button-group button {
+                width: 100%;
+            }
+            
+            #result p {
+                flex-direction: column;
+                gap: 5px;
+                padding: 12px 0;
+            }
+            
+            #result strong {
+                min-width: auto;
             }
         }
         
@@ -877,6 +1115,42 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Phần tra cứu kết quả -->
+        <div class="result-section">
+            <h2 class="section-title"><i class="fas fa-search"></i> Tra cứu kết quả</h2>
+            <div class="result-container">
+                <div class="input-group">
+                    <label for="studentId">
+                        <i class="fas fa-id-card"></i>
+                        MÃ SỐ ĐỊNH DANH CÁ NHÂN
+                    </label>
+                    <input type="text" 
+                           id="studentId" 
+                           placeholder="Nhập 12 chữ số theo CCCD/Giấy khai sinh"
+                           pattern="\d{12}"
+                           title="Vui lòng nhập đúng 12 chữ số"
+                           required>
+                    <div class="error-message" id="idError">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Mã số phải gồm 12 chữ số
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button onclick="searchStudent()">
+                        <i class="fas fa-search"></i>
+                        Tra cứu
+                    </button>
+                    <button id="sendProfileBtn" onclick="sendProfile()" style="display: none;">
+                        <i class="fas fa-paper-plane"></i>
+                        Gửi hồ sơ
+                    </button>
+                </div>
+                
+                <div id="result"></div>
+            </div>
+        </div>
     </main>
     
     <footer class="footer">
@@ -894,5 +1168,199 @@
             </div>
         </div>
     </footer>
+    
+    <script>
+        // Biến lưu trữ dữ liệu học sinh hiện tại
+        let currentStudentData = null;
+        
+        function validateStudentId(id) {
+            const errorDiv = document.getElementById('idError');
+            const input = document.getElementById('studentId');
+            
+            if (!id) {
+                errorDiv.innerHTML = `
+                    <i class="fas fa-exclamation-circle"></i>
+                    Vui lòng nhập mã định danh học sinh`;
+                errorDiv.style.display = 'flex';
+                input.classList.add('input-highlight');
+                return false;
+            }
+            
+            if (!/^\d{12}$/.test(id)) {
+                errorDiv.innerHTML = `
+                    <i class="fas fa-exclamation-circle"></i>
+                    Mã số phải gồm 12 chữ số`;
+                errorDiv.style.display = 'flex';
+                input.classList.add('input-highlight');
+                return false;
+            }
+            
+            errorDiv.style.display = 'none';
+            input.classList.remove('input-highlight');
+            return true;
+        }
+
+        function searchStudent() {
+            const studentId = document.getElementById('studentId').value.trim();
+            const resultDiv = document.getElementById('result');
+            const sendBtn = document.getElementById('sendProfileBtn');
+            
+            // Ẩn nút gửi khi tra cứu mới
+            sendBtn.style.display = 'none';
+            currentStudentData = null;
+
+            if (!validateStudentId(studentId)) {
+                resultDiv.innerHTML = '';
+                return;
+            }
+
+            resultDiv.innerHTML = '<div class="loading-dots">Đang tra cứu thông tin</div>';
+            
+            // Sử dụng Google Apps Script để truy vấn Google Sheet
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxaLtGW8-Cwm2el3-F6C5NkBBq3KqyPn2bZvqhkFD_j_zINh95NNAKB2BNKyjdteeL-/exec';
+            const url = `${scriptUrl}?id=${encodeURIComponent(studentId)}`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        displayStudentData(data.data);
+                        // Lưu dữ liệu học sinh hiện tại
+                        currentStudentData = data.data;
+                    } else {
+                        resultDiv.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--important);">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                            <p>${data.message}</p>
+                        </div>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi:', error);
+                    resultDiv.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--important);">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                        <p>Đã xảy ra lỗi khi tra cứu. Vui lòng thử lại sau!</p>
+                    </div>`;
+                });
+        }
+
+        function displayStudentData(data) {
+            const resultDiv = document.getElementById('result');
+            const sendBtn = document.getElementById('sendProfileBtn');
+            
+            let statusClass = '';
+            switch(data.kqxettuyen.toLowerCase()) {
+                case 'Chưa xét tuyển':
+                    statusClass = 'status-received';
+                    break;
+                case 'Trúng tuyển':
+                    statusClass = 'status-processing';
+                    break;
+                case 'Không trúng tuyển':
+                    statusClass = 'status-error';
+                    break;
+                case 'chưa gửi':
+                    statusClass = 'status-not-sent';
+                    // Hiển thị nút gửi nếu trạng thái là "Chưa gửi"
+                    sendBtn.style.display = 'flex';
+                    break;
+                default:
+                    statusClass = 'status-default';
+            }
+
+            resultDiv.innerHTML = `
+                <div style="margin-bottom: 15px; text-align: center;">
+                    <i class="fas fa-user-graduate" style="font-size: 36px; color: var(--primary); margin-bottom: 10px;"></i>
+                    <h3 style="color: var(--primary);">KẾT QUẢ TUYỂN SINH</h3>
+                </div>
+                <p><strong>Mã định danh HS:</strong> ${data.maDinhDanh}</p>
+                <p><strong>Họ và tên học sinh:</strong> ${data.hoTen}</p>
+                <p><strong>Ngày sinh:</strong> ${data.ngaySinh}</p>
+                <p><strong>Giới tính:</strong> ${data.gioiTinh}</p>
+                <p><strong>Dân tộc:</strong> ${data.danToc}</p>
+                <p><strong>Trường tiểu học:</strong> ${data.truongTieuHoc}</p>
+		<p><strong>Điểm đánh giá từ lớp 1-5:</strong> ${data.diemdanhgia1}</p>
+		<p><strong>Điểm kiểm tra môn học từ lớp 1-5:</strong> ${data.diemdanhgia2}</p>
+		<p><strong>Điểm đánh giá năng lưc phẩm chất lớp 5:</strong> ${data.diemdanhgia3}</p>
+		<p><strong>Tổng điểm đánh giá:</strong> ${data.tongdiemdg}</p>
+		<p><strong>Điểm Ưu tiên:</strong> ${data.diemuutien}</p>
+		<p><strong>Điểm Khuyến khích:</strong> ${data.diemkk}</p>
+		<p><strong>Tổng điểm xét tuyển:</strong> ${data.tongdiem}</p>
+
+
+
+                <p><strong>Kết quả xét tuyển:</strong> 
+                    <span class="status-badge ${statusClass}">${data.kqxettuyen}</span>
+                </p>
+                <p><strong>Ghi chú:</strong> ${data.ghichu}</p>
+            `;
+        }
+
+        function sendProfile() {
+            if (!currentStudentData) {
+                alert('Không có dữ liệu học sinh để gửi!');
+                return;
+            }
+            
+            const sendBtn = document.getElementById('sendProfileBtn');
+            const resultDiv = document.getElementById('result');
+            
+            // Hiển thị trạng thái đang gửi
+            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang gửi...';
+            sendBtn.disabled = true;
+            sendBtn.classList.add('pulse-effect');
+            
+            // Tạo dữ liệu để gửi đến Google Apps Script
+            const formData = new FormData();
+            formData.append('action', 'saveToSheet2');
+            formData.append('data', JSON.stringify(currentStudentData));
+            
+            // URL Google Apps Script
+            const url = 'https://script.google.com/macros/s/AKfycbxaLtGW8-Cwm2el3-F6C5NkBBq3KqyPn2bZvqhkFD_j_zINh95NNAKB2BNKyjdteeL-/exec';
+            
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Hiển thị thông báo thành công
+                    resultDiv.innerHTML += `
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(34, 197, 94, 0.1); border-radius: 8px; border-left: 4px solid var(--success);">
+                            <p style="color: #166534; font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle"></i>
+                                Đã gửi hồ sơ thành công! Thông tin đã được lưu vào hệ thống.
+                            </p>
+                        </div>
+                    `;
+                    
+                    // Cập nhật trạng thái cục bộ
+                    const statusElement = document.querySelector('.status-badge');
+                    if (statusElement) {
+                        statusElement.textContent = 'Đã gửi';
+                        statusElement.className = 'status-badge status-received';
+                    }
+                    
+                    // Ẩn nút gửi sau khi thành công
+                    sendBtn.style.display = 'none';
+                } else {
+                    alert('Gửi hồ sơ thất bại: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi gửi hồ sơ:', error);
+                alert('Đã xảy ra lỗi khi gửi hồ sơ. Vui lòng thử lại!');
+            })
+            .finally(() => {
+                // Khôi phục trạng thái nút
+                sendBtn.innerHTML = `
+                    <i class="fas fa-paper-plane"></i>
+                    Gửi hồ sơ
+                `;
+                sendBtn.disabled = false;
+                sendBtn.classList.remove('pulse-effect');
+            });
+        }
+    </script>
 </body>
 </html>
