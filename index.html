@@ -939,6 +939,42 @@
     <main class="container">
         <h1 class="main-title">THÔNG BÁO TUYỂN SINH LỚP 6 NĂM HỌC 2025 - 2026</h1>
         
+        <!-- Phần tra cứu kết quả được đưa lên đầu -->
+        <div class="result-section">
+            <h2 class="section-title"><i class="fas fa-search"></i> Tra cứu kết quả xét tuyển lớp 6 chất lượng cao năm học 2025-2026</h2>
+            <div class="result-container">
+                <div class="input-group">
+                    <label for="studentId">
+                        <i class="fas fa-id-card"></i>
+                        MÃ SỐ ĐỊNH DANH CÁ NHÂN
+                    </label>
+                    <input type="text" 
+                           id="studentId" 
+                           placeholder="Nhập 12 chữ số theo CCCD"
+                           pattern="\d{12}"
+                           title="Vui lòng nhập đúng 12 chữ số"
+                           required>
+                    <div class="error-message" id="idError">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Mã số phải gồm 12 chữ số
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button onclick="searchStudent()">
+                        <i class="fas fa-search"></i>
+                        Tra cứu
+                    </button>
+                    <button id="sendProfileBtn" onclick="sendProfile()" style="display: none;">
+                        <i class="fas fa-paper-plane"></i>
+                        Gửi hồ sơ
+                    </button>
+                </div>
+                
+                <div id="result"></div>
+            </div>
+        </div>
+        
         <div class="section">
             <h2 class="section-title"><i class="fas fa-users"></i> Đối tượng & Chỉ tiêu</h2>
             <div class="info-grid">
@@ -1113,42 +1149,6 @@
                         <i class="fab fa-zalando"></i> Truy cập nhóm
                     </a>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Phần tra cứu kết quả -->
-        <div class="result-section">
-            <h2 class="section-title"><i class="fas fa-search"></i> Tra cứu kết quả xét tuyển lớp 6 chất lượng cao năm học 2025-2026</h2>
-            <div class="result-container">
-                <div class="input-group">
-                    <label for="studentId">
-                        <i class="fas fa-id-card"></i>
-                        MÃ SỐ ĐỊNH DANH CÁ NHÂN
-                    </label>
-                    <input type="text" 
-                           id="studentId" 
-                           placeholder="Nhập 12 chữ số theo CCCD"
-                           pattern="\d{12}"
-                           title="Vui lòng nhập đúng 12 chữ số"
-                           required>
-                    <div class="error-message" id="idError">
-                        <i class="fas fa-exclamation-circle"></i>
-                        Mã số phải gồm 12 chữ số
-                    </div>
-                </div>
-                
-                <div class="button-group">
-                    <button onclick="searchStudent()">
-                        <i class="fas fa-search"></i>
-                        Tra cứu
-                    </button>
-                    <button id="sendProfileBtn" onclick="sendProfile()" style="display: none;">
-                        <i class="fas fa-paper-plane"></i>
-                        Gửi hồ sơ
-                    </button>
-                </div>
-                
-                <div id="result"></div>
             </div>
         </div>
     </main>
