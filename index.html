@@ -1217,7 +1217,7 @@
             resultDiv.innerHTML = '<div class="loading-dots">Đang tra cứu thông tin</div>';
             
             // Sử dụng Google Apps Script để truy vấn Google Sheet
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbw1ZiL7kz5yM8ha7wrrYe_KKf7ESQf8JonYaDDxHgFfUrdP2QRrTX5Khjq8vrnKfpWs/exec';
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbyBDc_B2dXtlzdnhBfD4yEmGiFkadDxYAKs05BSAJ-isi8acoKXMJSB7E567FuTHjCg/exec';
             const url = `${scriptUrl}?id=${encodeURIComponent(studentId)}`;
             
             fetch(url)
@@ -1315,7 +1315,7 @@
             formData.append('data', JSON.stringify(currentStudentData));
             
             // URL Google Apps Script
-            const url = 'https://script.google.com/macros/s/AKfycbw1ZiL7kz5yM8ha7wrrYe_KKf7ESQf8JonYaDDxHgFfUrdP2QRrTX5Khjq8vrnKfpWs/exec';
+            const url = 'https://script.google.com/macros/s/AKfycbyBDc_B2dXtlzdnhBfD4yEmGiFkadDxYAKs05BSAJ-isi8acoKXMJSB7E567FuTHjCg/exec';
             
             fetch(url, {
                 method: 'POST',
