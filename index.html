@@ -1217,7 +1217,7 @@
             resultDiv.innerHTML = '<div class="loading-dots">Đang tra cứu thông tin</div>';
             
             // Sử dụng Google Apps Script để truy vấn Google Sheet
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbyBDc_B2dXtlzdnhBfD4yEmGiFkadDxYAKs05BSAJ-isi8acoKXMJSB7E567FuTHjCg/exec';
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzEiaWcqzu3qOx7uLaHmifzHTVF3bIV_q28OSqBpl107cP29eYWNAoTYbTdJKvTSY1w/exec';
             const url = `${scriptUrl}?id=${encodeURIComponent(studentId)}`;
             
             fetch(url)
@@ -1281,13 +1281,8 @@
 		<p><strong>Điểm đánh giá từ lớp 1-5:</strong> ${data.diemdanhgia1}</p>
 		<p><strong>Điểm kiểm tra môn học từ lớp 1-5:</strong> ${data.diemdanhgia2}</p>
 		<p><strong>Điểm đánh giá năng lưc phẩm chất lớp 5:</strong> ${data.diemdanhgia3}</p>
-		<p><strong>Tổng điểm đánh giá:</strong> ${data.tongdiemdg}</p>
-		<p><strong>Điểm Ưu tiên:</strong> ${data.diemuutien}</p>
-		<p><strong>Điểm Khuyến khích:</strong> ${data.diemkk}</p>
-		<p><strong>Tổng điểm xét tuyển:</strong> ${data.tongdiem}</p>
-
-
-
+  		<p><strong>Điểm năng lực phẩm chất vượt trội:</strong> ${data.diemdanhgia4}</p>
+		<p><strong>Tổng điểm xét tuyển:</strong> ${data.tongdiemdg}</p>
                 <p><strong>Kết quả xét tuyển:</strong> 
                     <span class="status-badge ${statusClass}">${data.kqxettuyen}</span>
                 </p>
@@ -1315,7 +1310,7 @@
             formData.append('data', JSON.stringify(currentStudentData));
             
             // URL Google Apps Script
-            const url = 'https://script.google.com/macros/s/AKfycbyBDc_B2dXtlzdnhBfD4yEmGiFkadDxYAKs05BSAJ-isi8acoKXMJSB7E567FuTHjCg/exec';
+            const url = 'https://script.google.com/macros/s/AKfycbzEiaWcqzu3qOx7uLaHmifzHTVF3bIV_q28OSqBpl107cP29eYWNAoTYbTdJKvTSY1w/exec';
             
             fetch(url, {
                 method: 'POST',
