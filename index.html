@@ -1118,7 +1118,7 @@
         
         <!-- Phần tra cứu kết quả -->
         <div class="result-section">
-            <h2 class="section-title"><i class="fas fa-search"></i> Tra cứu kết quả</h2>
+            <h2 class="section-title"><i class="fas fa-search"></i> Tra cứu kết quả xét tuyển lớp 6 chất lượng cao năm học 2025-2026</h2>
             <div class="result-container">
                 <div class="input-group">
                     <label for="studentId">
@@ -1127,7 +1127,7 @@
                     </label>
                     <input type="text" 
                            id="studentId" 
-                           placeholder="Nhập 12 chữ số theo CCCD/Giấy khai sinh"
+                           placeholder="Nhập 12 chữ số theo CCCD"
                            pattern="\d{12}"
                            title="Vui lòng nhập đúng 12 chữ số"
                            required>
@@ -1217,7 +1217,7 @@
             resultDiv.innerHTML = '<div class="loading-dots">Đang tra cứu thông tin</div>';
             
             // Sử dụng Google Apps Script để truy vấn Google Sheet
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzEiaWcqzu3qOx7uLaHmifzHTVF3bIV_q28OSqBpl107cP29eYWNAoTYbTdJKvTSY1w/exec';
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzT94TkVMa1ba9ryTlUzpTvJjiVyfKChDTNGhE7STA7uABYwDZ_0RXC5ZFrnSxuVoCb/exec';
             const url = `${scriptUrl}?id=${encodeURIComponent(studentId)}`;
             
             fetch(url)
@@ -1270,7 +1270,7 @@
             resultDiv.innerHTML = `
                 <div style="margin-bottom: 15px; text-align: center;">
                     <i class="fas fa-user-graduate" style="font-size: 36px; color: var(--primary); margin-bottom: 10px;"></i>
-                    <h3 style="color: var(--primary);">KẾT QUẢ TUYỂN SINH</h3>
+                    <h3 style="color: var(--primary);">KẾT QUẢ XÉT TUYỂN</h3>
                 </div>
                 <p><strong>Mã định danh HS:</strong> ${data.maDinhDanh}</p>
                 <p><strong>Họ và tên học sinh:</strong> ${data.hoTen}</p>
@@ -1283,6 +1283,9 @@
 		<p><strong>Điểm đánh giá năng lưc phẩm chất lớp 5:</strong> ${data.diemdanhgia3}</p>
   		<p><strong>Điểm năng lực phẩm chất vượt trội:</strong> ${data.diemdanhgia4}</p>
 		<p><strong>Tổng điểm xét tuyển:</strong> ${data.tongdiemdg}</p>
+  		<p><strong>Điểm ưu tiên:</strong> ${data.diemut}</p>
+    		<p><strong>Điểm khuyến khích:</strong> ${data.diemut}</p>
+  
                 <p><strong>Kết quả xét tuyển:</strong> 
                     <span class="status-badge ${statusClass}">${data.kqxettuyen}</span>
                 </p>
@@ -1310,7 +1313,7 @@
             formData.append('data', JSON.stringify(currentStudentData));
             
             // URL Google Apps Script
-            const url = 'https://script.google.com/macros/s/AKfycbzEiaWcqzu3qOx7uLaHmifzHTVF3bIV_q28OSqBpl107cP29eYWNAoTYbTdJKvTSY1w/exec';
+            const url = 'https://script.google.com/macros/s/AKfycbzT94TkVMa1ba9ryTlUzpTvJjiVyfKChDTNGhE7STA7uABYwDZ_0RXC5ZFrnSxuVoCb/exec';
             
             fetch(url, {
                 method: 'POST',
